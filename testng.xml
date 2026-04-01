@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+
+<suite name="Sanity Suite">
+
+	<listeners>
+		<listener class-name="listeners.TestListner"></listener>
+	</listeners>
+	<test thread-count="5" name="Sanity Testing">
+		<classes>
+			<class name="test.DashboardTest" />
+			<class name="test.BankTest" />
+		<!--	<class name="test.SnapshotTest" />
+			<class name="test.MoneylinkTest" />
+			<class name="test.ReportsTest" />
+			<class name="test.UpdatedetailsTest" />-->
+		</classes>
+	</test> <!--
+	Sanity Testing -->
+</suite> <!--
+Sanity Suite -->

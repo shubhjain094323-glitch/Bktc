@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Failed suite [Failed suite [Suite]]]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)(failed)(failed)">
+    <classes>
+      <class name="TestNG.TestNG.SnapshotTest">
+        <methods>
+          <include name="init"/>
+          <include name="Snapshot_quickentry"/>
+          <include name="bulkaction"/>
+          <include name="delete_snapshot"/>
+          <include name="createSnapshot"/>
+          <include name="setupSuite"/>
+          <include name="ExcelImport"/>
+          <include name="tearDownSuite"/>
+          <include name="Bulk_Upload"/>
+        </methods>
+      </class> <!-- TestNG.TestNG.SnapshotTest -->
+    </classes>
+  </test> <!-- Test(failed)(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Failed suite [Suite]]] -->
