@@ -50,5 +50,21 @@ public class RandomData {
 	public String getphonenum() {
 		return "9" + faker.number().digits(9);
 	}
+	
+	public String getStateName() {
+		return faker.address().state();
+	}
+	
+	public String getName() {
+		return faker.name().fullName();	
+	}
+	
+	public String getUserName() {
+		return faker.name().username();	
+	}
+	
+	public String getemail() {
+	    return faker.internet().emailAddress("gmail.com");
+	}
 
 }

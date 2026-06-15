@@ -13,6 +13,11 @@ import org.openqa.selenium.WebDriver;
 public class Screenshots {
 
 	public static String captureScreenshot(WebDriver driver, String testName) {
+		
+		if(driver == null){
+		    System.out.println("Driver is null, screenshot skipped");
+		    return null;
+		}
 
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 		String screenshotName = testName + "_" + timeStamp + ".png";

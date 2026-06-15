@@ -3,14 +3,20 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestNG.TestNG.UpdatedetailsTest">
+      <class name="test.SnapshotTest">
         <methods>
-          <include name="setupSuite"/>
-          <include name="tearDownSuite"/>
+          <include name="bulkaction"/>
+          <include name="delete_snapshot"/>
+          <include name="Bulk_Upload"/>
           <include name="init"/>
-          <include name="update_accountdetails"/>
+          <include name="tearDownSuite"/>
+          <include name="Snapshot_quickentry"/>
+          <include name="setupSuite"/>
+          <include name="createSnapshot"/>
+          <include name="Delete_SelectedSnapshot"/>
+          <include name="ExcelImport"/>
         </methods>
-      </class> <!-- TestNG.TestNG.UpdatedetailsTest -->
+      </class> <!-- test.SnapshotTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

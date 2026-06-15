@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import pages.BaseTest;
 import pages.Moneylink;
 
 public class MoneylinkTest extends BaseTest {
@@ -19,7 +20,7 @@ public class MoneylinkTest extends BaseTest {
 	Moneylink ml;
 	WebDriverWait wait;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void init() {
 		try {
 			ml = new Moneylink(driver);
@@ -30,13 +31,13 @@ public class MoneylinkTest extends BaseTest {
 		}
 	}
 
-	@Test
+	@Test(groups = { "sanity" , "regression" })
 	public void open_moneylink() throws InterruptedException {
 		ml.openMoneylinkPage();
 		ml.setupMoneylink();
 	}
 
-	@Test(dependsOnMethods = "open_moneylink", alwaysRun = true)
+	@Test(dependsOnMethods = "open_moneylink", alwaysRun = true,groups = { "sanity" , "regression" })
 	public void reset_moneylinktransaction() throws InterruptedException {
 
 		SoftAssert soft = new SoftAssert();
@@ -44,13 +45,10 @@ public class MoneylinkTest extends BaseTest {
 		ml.transactionreset();
 
 		WebElement msg = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Successful')]")));
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='pmsg-blue-center']")));
 
 		String actualReset = msg.getText();
 		System.out.println("Reset Message: " + actualReset);
-
-//		soft.assertTrue(actualReset.contains("Successful"), "Transaction is not reset");
-//		Thread.sleep(1500);
 
 		if (actualReset.contains("Successful")) {
 			soft.assertTrue(true);
@@ -66,7 +64,7 @@ public class MoneylinkTest extends BaseTest {
 		soft.assertAll();
 	}
 
-	@Test(dependsOnMethods = "reset_moneylinktransaction", alwaysRun = true)
+	@Test(dependsOnMethods = "reset_moneylinktransaction", alwaysRun = true, groups = { "sanity" , "regression" })
 	public void single_transaction_accounting() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
@@ -85,7 +83,7 @@ public class MoneylinkTest extends BaseTest {
 		soft.assertAll();
 	}
 
-	@Test(dependsOnMethods = "single_transaction_accounting", alwaysRun = true)
+	@Test(dependsOnMethods = "single_transaction_accounting", alwaysRun = true, groups = { "sanity" , "regression" })
 	public void moneylink_quickentry() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
@@ -98,7 +96,7 @@ public class MoneylinkTest extends BaseTest {
 		soft.assertAll();
 	}
 
-	@Test(dependsOnMethods = "moneylink_quickentry", alwaysRun = true)
+	@Test(dependsOnMethods = "moneylink_quickentry", alwaysRun = true, groups = { "sanity" , "regression" })
 	public void CR_Bulkentries() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
@@ -112,7 +110,7 @@ public class MoneylinkTest extends BaseTest {
 		soft.assertAll();
 	}
 
-	@Test(dependsOnMethods = "CR_Bulkentries", alwaysRun = true)
+	@Test(dependsOnMethods = "CR_Bulkentries", alwaysRun = true,groups = { "sanity" , "regression" })
 	public void DR_Bulkentries() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 

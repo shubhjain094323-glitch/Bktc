@@ -13,6 +13,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,11 +30,8 @@ public class Moneylink {
 
 	// Constructor
 	public Moneylink(WebDriver driver) throws FileNotFoundException, AWTException {
-		// WebDriverManager.chromedriver().setup();
-		// driver = new ChromeDriver();
-		// driver.manage().window().maximize();
 		this.driver = driver;
-
+		PageFactory.initElements(driver, this);
 		js = (JavascriptExecutor) driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		config = new ReadConfigFile();
@@ -41,11 +40,94 @@ public class Moneylink {
 
 	}
 
+	@FindBy(xpath = "//span[@class='icon-Link-icon']")
+	WebElement gotoMoneylink;
+
+	@FindBy(xpath = "//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")
+	WebElement contextMenu;
+
+	@FindBy(xpath = "//div[@id='mui-component-select-financial_institute']")
+	WebElement selectbank;
+
+	@FindBy(xpath = "//body/div[@id='root']/div[@id='page-top']/div/main[@class='content-wrapper-new']/div[@class='container-fluid container-padding-new']/div[@class='row mainFilter-new sec-mb']/div[@class='col-12']/div[@class='top-new-filter']/div[@class='d-flex flex-wrap align-items-center gap-10']/div[@class='filter-bar-new filter-bar-wrap dropdown_moneyin']/div[2]/div[1]")
+	WebElement TimePeriod;
+
+	@FindBy(xpath = "//li[normalize-space()='Since Beginning']")
+	WebElement SinceBeginning;
+
+	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='S']")
+	WebElement ClickOnSingleEntry;
+
+	@FindBy(xpath = "//p[normalize-space()='Total']")
+	WebElement ClickonTotalWidgets;
+
+	@FindBy(xpath = "//tbody/tr[1]/td[4]")
+	WebElement SelectFirstRecord;
+
+	@FindBy(xpath = "//li[normalize-space()='Search']")
+	WebElement ClickonSearchEvidence;
+
+	@FindBy(xpath = "//button[normalize-space()='Apply']")
+	WebElement EvidenceFilterApply;
+
+	@FindBy(xpath = "//span[@class='evi-card-amount ellips-auto']")
+	WebElement dragEvidence;
+
+	@FindBy(xpath = "//div[@class='evi-cards-list']")
+	WebElement dropEvidence;
+
+	@FindBy(xpath = "//div[contains(text(),'Select voucher type')]")
+	WebElement SelectVoucherType;
+
+	@FindBy(xpath = "//div[@class='Select-Search css-2b097c-container']//div[@class='Select SelectLedger __value-container Select SelectLedger __value-container--has-value css-1hwfws3']")
+	WebElement SelectLedger;
+
+	@FindBy(xpath = "//button[normalize-space()='Save']")
+	WebElement SaveTransaction;
+
+	@FindBy(xpath = "//span[normalize-space()='Edit Allocation']")
+	WebElement ClickOnEditAllocation;
+
+	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='T']")
+	WebElement ClickOnTransactionReset;
+
+	@FindBy(xpath = "//label[contains(@for,'checkboxHeader')]//div[@class='check']")
+	WebElement ClickonCheckBox;
+
+	@FindBy(xpath = "//button[normalize-space()='Reset Transactions']")
+	WebElement ResetTransaction;
+
+	@FindBy(xpath = "//button[normalize-space()='Yes']")
+	WebElement ClickOnYes;
+
+	@FindBy(xpath = "//button[normalize-space()='Okay']")
+	WebElement ClickOnOkay;
+
+	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='C']")
+	WebElement ClickOnCR_BulkEntries;
+
+	@FindBy(xpath = "//a[normalize-space()='Add Entries']")
+	WebElement CLickonAddEntries;
+
+	@FindBy(css = ".ledger-right-bar")
+	WebElement ClickOnRefreshRecommendation;
+
+	@FindBy(xpath = "//div[@class='Select type-select __value-container Select type-select __value-container--has-value css-1hwfws3']")
+	WebElement ClickonSelectVoucherType;
+
+	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='D']")
+	WebElement ClickOnDR_BulkEntries;
+
+	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='Q']")
+	WebElement ClickOnMoneylink_Quick_Entry;
+
+	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='X']")
+	WebElement ClickOnMoneylink_ExportList;
+
 	public void openMoneylinkPage() throws InterruptedException {
-		WebElement moneylink = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='icon-Link-icon']")));
-		moneylink.click();
-		// actions.moveByOffset(200, 400).click().perform();
+
+		wait.until(ExpectedConditions.elementToBeClickable(gotoMoneylink));
+		gotoMoneylink.click();
 		Thread.sleep(1000);
 		System.out.println("Opened Moneylink page");
 	}
@@ -55,13 +137,12 @@ public class Moneylink {
 
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//span[@class='icon-menu-lines white-icon']")).click();
+		contextMenu.click();
 
 		// Bank selection
-		WebElement bankselection = wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("//div[@id='mui-component-select-financial_institute']")));
-		Thread.sleep(1500);
-		bankselection.click();
+		wait.until(ExpectedConditions.elementToBeClickable(selectbank));
+		Thread.sleep(1000);
+		selectbank.click();
 
 		String bankName = config.getSelectbank();
 		WebElement option = wait.until(ExpectedConditions
@@ -72,13 +153,11 @@ public class Moneylink {
 		Thread.sleep(2000);
 
 		// Time period selection
-		WebElement yearDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-				"//div[@class='MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary global_new_dd_date css-fvipm8']//div[@id='mui-component-select-year_type']")));
-		yearDropdown.click();
+		wait.until(ExpectedConditions.elementToBeClickable(TimePeriod));
+		TimePeriod.click();
 
-		WebElement sinceBeginning = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[normalize-space()='Since Beginning']")));
-		sinceBeginning.click();
+		wait.until(ExpectedConditions.elementToBeClickable(SinceBeginning));
+		SinceBeginning.click();
 
 		Thread.sleep(1500);
 
@@ -88,64 +167,51 @@ public class Moneylink {
 
 		Thread.sleep(4000);
 
-		driver.findElement(By.xpath("//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")).click();
+		contextMenu.click();
 		Thread.sleep(1500);
 
-		// select single Entry option from the contex menu
-		driver.findElement(By.xpath("//div[@class='dropdown-menu show']//button[1]")).click();
+		ClickOnSingleEntry.click();
 
-		driver.findElement(By.xpath("//p[normalize-space()='Total']")).click();
+		ClickonTotalWidgets.click();
 
 		js.executeScript("window.scrollBy(0, 200)");
 
-		WebElement transaction = driver.findElement(By.xpath("//tbody/tr[1]/td[4]"));
-		js.executeScript("arguments[0].click();", transaction);
+		js.executeScript("arguments[0].click();", SelectFirstRecord);
 		Thread.sleep(2000);
 
-		WebElement searchevidence = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[normalize-space()='Search']")));
-		searchevidence.click();
+		wait.until(ExpectedConditions.elementToBeClickable(ClickonSearchEvidence));
+		ClickonSearchEvidence.click();
 		Thread.sleep(2000);
 
-		WebElement filterapply = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Apply']")));
-		filterapply.click();
+		wait.until(ExpectedConditions.elementToBeClickable(EvidenceFilterApply));
+		EvidenceFilterApply.click();
 		Thread.sleep(3000);
 
-		WebElement dragevidence = driver.findElement(By.xpath("//span[@class='evi-card-amount ellips-auto']"));
-		Thread.sleep(1000);
-
-		WebElement dropevidence = driver.findElement(By.xpath("//div[@class='evi-cards-list']"));
-		Thread.sleep(1000);
-
 		// Scroll into view
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dragevidence);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dropevidence);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dragEvidence);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dropEvidence);
 
 		Thread.sleep(1000);
 
 		// Perform drag and drop
 
-		actions.clickAndHold(dragevidence).moveToElement(dropevidence).release().perform();
+		actions.clickAndHold(dragEvidence).moveToElement(dropEvidence).release().perform();
 
 		// System.out.println("Drag and drop executed!");
 
-		WebElement selectvouchertype = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Select voucher type')]")));
-		selectvouchertype.click();
+		wait.until(ExpectedConditions.elementToBeClickable(SelectVoucherType));
+		SelectVoucherType.click();
 		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
 		Thread.sleep(2000);
 
-		WebElement selectledger = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-				"//div[@class='Select-Search css-2b097c-container']//div[@class='Select SelectLedger __value-container Select SelectLedger __value-container--has-value css-1hwfws3']")));
-		selectledger.click();
+		wait.until(ExpectedConditions.elementToBeClickable(SelectLedger));
+		SelectLedger.click();
 		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
 
 		Thread.sleep(2000);
 
-		WebElement savetransaction = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save']")));
-		savetransaction.click();
+		wait.until(ExpectedConditions.elementToBeClickable(SaveTransaction));
+		SaveTransaction.click();
 		Thread.sleep(1500);
 
 		// Use a very short explicit wait just to check presence
@@ -164,12 +230,9 @@ public class Moneylink {
 
 				js.executeScript("window.scrollBy(0, -500)");
 
-				WebElement editallocation = wait.until(ExpectedConditions
-						.elementToBeClickable((By.xpath("//span[normalize-space()='Edit Allocation']"))));
+				wait.until(ExpectedConditions.elementToBeClickable((ClickOnEditAllocation)));
 				Thread.sleep(1500);
-				editallocation.click();
-
-				// actions.moveToElement(editallocation).perform();
+				ClickOnEditAllocation.click();
 
 				WebElement addnewrow = driver.findElement(By.xpath("//button[normalize-space()='Add New Row']"));
 				addnewrow.click();
@@ -182,7 +245,7 @@ public class Moneylink {
 						"//div[contains(@class,'reset_apply_btn_new mt-2')]//button[contains(@type,'button')][normalize-space()='Save']"))
 						.click();
 
-				savetransaction.click();
+				SaveTransaction.click();
 				Thread.sleep(3000);
 
 				wait.until(
@@ -201,32 +264,27 @@ public class Moneylink {
 
 	public void crbulkentries() throws InterruptedException {
 
-		Thread.sleep(2500);
+		// Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(contextMenu));
+		contextMenu.click();
 
-		driver.findElement(By.xpath("//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")).click();
 		Thread.sleep(1500);
 
-		// CR Bulk entries selection
-		driver.findElement(By.xpath("//span[@class='shortcut_keys_action' and text()='C']")).click();
-		actions.sendKeys(Keys.ARROW_DOWN, Keys.ENTER).perform();
+		ClickOnCR_BulkEntries.click();
 
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//div[@class='check']")).click();
+		ClickonCheckBox.click();
 
-		driver.findElement(By.xpath("//a[normalize-space()='Add Entries']")).click();
+		CLickonAddEntries.click();
 		Thread.sleep(1500);
 
-		driver.findElement(By.cssSelector(".ledger-right-bar")).click();
+		ClickOnRefreshRecommendation.click();
 		Thread.sleep(1500);
+		
+		wait.until(ExpectedConditions.elementToBeClickable(ClickOnYes)).click();
 
-		driver.findElement(By.xpath("//button[normalize-space()='Yes']")).click();
-
-		driver.findElement(By.xpath(
-				"//div[@class='Select type-select __value-container Select type-select __value-container--has-value css-1hwfws3']"))
-				.click();
-
-		// driver.findElement(By.xpath("//span[@class='path10']")).click();
+		ClickonSelectVoucherType.click();
 
 		WebElement vouchertype = wait
 				.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Receipt']")));
@@ -241,8 +299,7 @@ public class Moneylink {
 		driver.findElement(By.xpath("//button[normalize-space()='Create Entries']")).click();
 
 		Thread.sleep(2000);
-
-		driver.findElement(By.xpath("//button[normalize-space()='Yes']")).click();
+		ClickOnYes.click();
 		Thread.sleep(3000);
 
 		System.out.println("Bulk CR entries done");
@@ -253,28 +310,23 @@ public class Moneylink {
 
 		Thread.sleep(4000);
 
-		driver.findElement(By.xpath("//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(contextMenu));
+		contextMenu.click();
 		Thread.sleep(1500);
 
-		driver.findElement(By.xpath("//span[@class='shortcut_keys_action' and text()='D']")).click();
-		// actions.sendKeys(Keys.ARROW_DOWN, Keys.ENTER).perform();
+		ClickOnDR_BulkEntries.click();
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//div[@class='check']")).click();
-
-		driver.findElement(By.xpath("//a[normalize-space()='Add Entries']")).click();
+		ClickonCheckBox.click();
+		CLickonAddEntries.click();
 		Thread.sleep(1500);
 
-		driver.findElement(By.cssSelector(".ledger-right-bar")).click();
+		ClickOnRefreshRecommendation.click();
 		Thread.sleep(1500);
+		
+		wait.until(ExpectedConditions.elementToBeClickable(ClickOnYes)).click();
 
-		driver.findElement(By.xpath("//button[normalize-space()='Yes']")).click();
-
-		driver.findElement(By.xpath(
-				"//div[@class='Select type-select __value-container Select type-select __value-container--has-value css-1hwfws3']"))
-				.click();
-
-		// driver.findElement(By.xpath("//span[@class='path10']")).click();
+		ClickonSelectVoucherType.click();
 
 		WebElement vouchertype = wait
 				.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Payment']")));
@@ -300,9 +352,10 @@ public class Moneylink {
 	public void moneylinkquickentry() throws InterruptedException {
 		Thread.sleep(3000);
 
-		driver.findElement(By.xpath("//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")).click();
+		contextMenu.click();
 		Thread.sleep(1500);
-		driver.findElement(By.xpath("//span[@class='shortcut_keys_action' and text()='Q']")).click();
+
+		ClickOnMoneylink_Quick_Entry.click();
 		Thread.sleep(1000);
 		// Select first moneylink for the quick entry
 		for (int i = 0; i < 1; i++) {
@@ -311,9 +364,8 @@ public class Moneylink {
 			checkbox.click();
 			System.out.println("Clicked checkbox" + i);
 		}
-		// click on add entries button
 
-		driver.findElement(By.xpath("//a[normalize-space()='Add Entries']")).click();
+		CLickonAddEntries.click();
 		Thread.sleep(2500);
 
 		By partyledgerdropdwon = By.xpath("//div[@class='Select type-select __value-container css-1nol46l']");
@@ -333,13 +385,13 @@ public class Moneylink {
 
 		Thread.sleep(3000);
 
-		driver.findElement(By.xpath("//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")).click();
+		contextMenu.click();
 		Thread.sleep(1500);
 
-		driver.findElement(By.xpath("//span[@class='shortcut_keys_action' and text()='T']")).click();
+		ClickOnTransactionReset.click();
 		Thread.sleep(1000);
 
-		driver.findElement(By.xpath("//label[contains(@for,'checkboxHeader')]//div[@class='check']")).click();
+		ClickonCheckBox.click();
 		Thread.sleep(1000);
 
 		List<WebElement> selectAcross = driver
@@ -349,24 +401,33 @@ public class Moneylink {
 			selectAcross.get(0).click();
 		}
 
-		WebElement resetbutton = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Reset Transactions']")));
+		wait.until(ExpectedConditions.elementToBeClickable(ResetTransaction));
 
-		resetbutton.click();
+		ResetTransaction.click();
 
-		WebElement yesbutton = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Yes']")));
-		yesbutton.click();
+		wait.until(ExpectedConditions.elementToBeClickable(ClickOnYes));
+		ClickOnYes.click();
 
 		Thread.sleep(15000);
 
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
+		// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
+		
+		WebElement msg = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='pmsg-blue-center']")));
+
+		String actualReset = msg.getText();
+		System.out.println("Reset Message: " + actualReset);
+
+		Thread.sleep(3000);
+
+		wait.until(ExpectedConditions.visibilityOf(ClickOnOkay));
+		ClickOnOkay.click();
+
+		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Okay']"))).click();
 
 		Thread.sleep(2000);
-		WebElement okbutton = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Okay']")));
-		Thread.sleep(2000);
-		okbutton.click();
+
+		// ClickOnOkay.click();
 
 		System.out.println("Transaction reseted successfully");
 
@@ -375,10 +436,10 @@ public class Moneylink {
 	public void exportlist() throws InterruptedException {
 		Thread.sleep(4000);
 
-		driver.findElement(By.xpath("//div[@class='action-new-menu dropdown']//button[@id='dropdown-basic']")).click();
+		contextMenu.click();
 		Thread.sleep(1500);
 
-		driver.findElement(By.xpath("//div[@class='row mainFilter-new sec-mb']//button[7]")).click();
+		ClickOnMoneylink_ExportList.click();
 		Thread.sleep(1500);
 
 		System.out.println("Export successfully done");

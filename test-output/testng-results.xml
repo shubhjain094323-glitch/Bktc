@@ -1,77 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="2" failed="1" skipped="0">
+<testng-results ignored="7" total="27" passed="17" failed="3" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-13T16:15:18 IST" name="Sanity Suite" finished-at="2026-03-13T16:16:02 IST" duration-ms="43794">
+  <suite started-at="2026-06-14T13:48:28 IST" name="Suite" finished-at="2026-06-14T13:54:54 IST" duration-ms="385668">
     <groups>
+      <group name="regression">
+        <method signature="BankTest.OpenBankingModule()[pri:0, instance:test.BankTest@3576ddc2]" name="OpenBankingModule" class="test.BankTest"/>
+        <method signature="BankTest.Addbank()[pri:0, instance:test.BankTest@3576ddc2]" name="Addbank" class="test.BankTest"/>
+        <method signature="BankTest.deleteBank()[pri:0, instance:test.BankTest@3576ddc2]" name="deleteBank" class="test.BankTest"/>
+        <method signature="MoneylinkTest.open_moneylink()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="open_moneylink" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.reset_moneylinktransaction()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="reset_moneylinktransaction" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.single_transaction_accounting()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="single_transaction_accounting" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.moneylink_quickentry()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="moneylink_quickentry" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.CR_Bulkentries()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="CR_Bulkentries" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.DR_Bulkentries()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="DR_Bulkentries" class="test.MoneylinkTest"/>
+        <method signature="SnapshotTest.createSnapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="createSnapshot" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.delete_snapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="delete_snapshot" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.ExcelImport()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="ExcelImport" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.Snapshot_quickentry()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="Snapshot_quickentry" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.bulkaction()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="bulkaction" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.Bulk_Upload()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="Bulk_Upload" class="test.SnapshotTest"/>
+        <method signature="UpdatedetailsTest.update_accountdetails()[pri:0, instance:test.UpdatedetailsTest@81d9a72]" name="update_accountdetails" class="test.UpdatedetailsTest"/>
+        <method signature="DashboardTest.dashboard_module()[pri:0, instance:test.DashboardTest@21d03963]" name="dashboard_module" class="test.DashboardTest"/>
+      </group> <!-- regression -->
+      <group name="Regression">
+        <method signature="ReportsTest.Export_Report()[pri:0, instance:test.ReportsTest@b86de0d]" name="Export_Report" class="test.ReportsTest"/>
+      </group> <!-- Regression -->
+      <group name="sanity">
+        <method signature="BankTest.OpenBankingModule()[pri:0, instance:test.BankTest@3576ddc2]" name="OpenBankingModule" class="test.BankTest"/>
+        <method signature="BankTest.Addbank()[pri:0, instance:test.BankTest@3576ddc2]" name="Addbank" class="test.BankTest"/>
+        <method signature="BankTest.update_Bank()[pri:0, instance:test.BankTest@3576ddc2]" name="update_Bank" class="test.BankTest"/>
+        <method signature="BankTest.deleteBank()[pri:0, instance:test.BankTest@3576ddc2]" name="deleteBank" class="test.BankTest"/>
+        <method signature="MoneylinkTest.open_moneylink()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="open_moneylink" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.reset_moneylinktransaction()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="reset_moneylinktransaction" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.single_transaction_accounting()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="single_transaction_accounting" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.moneylink_quickentry()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="moneylink_quickentry" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.CR_Bulkentries()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="CR_Bulkentries" class="test.MoneylinkTest"/>
+        <method signature="MoneylinkTest.DR_Bulkentries()[pri:0, instance:test.MoneylinkTest@2e570ded]" name="DR_Bulkentries" class="test.MoneylinkTest"/>
+        <method signature="ReportsTest.Export_Report()[pri:0, instance:test.ReportsTest@b86de0d]" name="Export_Report" class="test.ReportsTest"/>
+        <method signature="SnapshotTest.createSnapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="createSnapshot" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.delete_snapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="delete_snapshot" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.ExcelImport()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="ExcelImport" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.Snapshot_quickentry()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="Snapshot_quickentry" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.bulkaction()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="bulkaction" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.Bulk_Upload()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="Bulk_Upload" class="test.SnapshotTest"/>
+        <method signature="SnapshotTest.Delete_SelectedSnapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" name="Delete_SelectedSnapshot" class="test.SnapshotTest"/>
+        <method signature="UpdatedetailsTest.update_accountdetails()[pri:0, instance:test.UpdatedetailsTest@81d9a72]" name="update_accountdetails" class="test.UpdatedetailsTest"/>
+        <method signature="DashboardTest.dashboard_module()[pri:0, instance:test.DashboardTest@21d03963]" name="dashboard_module" class="test.DashboardTest"/>
+      </group> <!-- sanity -->
     </groups>
-    <test started-at="2026-03-13T16:15:18 IST" name="Sanity Testing" finished-at="2026-03-13T16:16:02 IST" duration-ms="43794">
-      <class name="test.DashboardTest">
-        <test-method is-config="true" signature="setupSuite()[pri:0, instance:test.DashboardTest@62656be4]" started-at="2026-03-13T16:14:56 IST" name="setupSuite" finished-at="2026-03-13T16:15:18 IST" duration-ms="21835" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setupSuite -->
-        <test-method is-config="true" signature="init()[pri:0, instance:test.DashboardTest@62656be4]" started-at="2026-03-13T16:15:19 IST" name="init" finished-at="2026-03-13T16:15:19 IST" duration-ms="4" status="PASS">
+    <test started-at="2026-06-14T13:48:28 IST" name="SanityTest" finished-at="2026-06-14T13:54:54 IST" duration-ms="385668">
+      <class name="test.MoneylinkTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:51:56 IST" name="init" finished-at="2026-06-14T13:51:56 IST" duration-ms="21" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="dashboard_module()[pri:0, instance:test.DashboardTest@62656be4]" started-at="2026-03-13T16:15:19 IST" name="dashboard_module" finished-at="2026-03-13T16:15:41 IST" duration-ms="22058" status="PASS">
+        <test-method signature="open_moneylink()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:51:56 IST" name="open_moneylink" finished-at="2026-06-14T13:52:07 IST" duration-ms="11840" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- dashboard_module -->
-        <test-method is-config="true" signature="tearDownSuite()[pri:0, instance:test.DashboardTest@62656be4]" started-at="2026-03-13T16:16:03 IST" name="tearDownSuite" finished-at="2026-03-13T16:16:04 IST" duration-ms="513" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDownSuite -->
-      </class> <!-- test.DashboardTest -->
-      <class name="test.BankTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:test.BankTest@6c7a164b]" started-at="2026-03-13T16:15:42 IST" name="init" finished-at="2026-03-13T16:15:42 IST" duration-ms="109" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- init -->
-        <test-method signature="add_bank()[pri:0, instance:test.BankTest@6c7a164b]" started-at="2026-03-13T16:15:42 IST" name="add_bank" finished-at="2026-03-13T16:15:54 IST" duration-ms="11778" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- add_bank -->
-        <test-method signature="delete_bank()[pri:0, instance:test.BankTest@6c7a164b]" started-at="2026-03-13T16:15:54 IST" name="delete_bank" finished-at="2026-03-13T16:16:02 IST" duration-ms="8162" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchElementException">
+        </test-method> <!-- open_moneylink -->
+        <test-method signature="reset_moneylinktransaction()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:52:08 IST" name="reset_moneylinktransaction" finished-at="2026-06-14T13:52:58 IST" depends-on-methods="test.MoneylinkTest.open_moneylink" duration-ms="50787" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='edit-icon-account cpointer']"}
-  (Session info: chrome=145.0.7632.117)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+              <![CDATA[Expected condition failed: waiting for visibility of element located by By.xpath: //p[contains(text(),'Successful')][1] (tried for 20 second(s) with 500 milliseconds interval)
 Build info: version: '4.35.0', revision: '1c58e5028b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.1'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [9003ddcf00bf0e50b6faddce3084d0df, findElement {using=xpath, value=//div[@class='edit-icon-account cpointer']}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.117, chrome: {chromedriverVersion: 145.0.7632.117 (de4e5d6e13b..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51995}, goog:processID: 27740, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51995/devtoo..., se:cdpVersion: 145.0.7632.117, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 9003ddcf00bf0e50b6faddce3084d0df]]>
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.104, chrome: {chromedriverVersion: 149.0.7827.115 (daf70f9ddee..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56037}, goog:processID: 4944, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56037/devtoo..., se:cdpVersion: 149.0.7827.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a12a95d79ab5a9dcaecce404dbdb8f41]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@class='edit-icon-account cpointer']"}
-  (Session info: chrome=145.0.7632.117)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //p[contains(text(),'Successful')][1] (tried for 20 second(s) with 500 milliseconds interval)
 Build info: version: '4.35.0', revision: '1c58e5028b'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.1'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [9003ddcf00bf0e50b6faddce3084d0df, findElement {using=xpath, value=//div[@class='edit-icon-account cpointer']}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.117, chrome: {chromedriverVersion: 145.0.7632.117 (de4e5d6e13b..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51995}, goog:processID: 27740, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51995/devtoo..., se:cdpVersion: 145.0.7632.117, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 9003ddcf00bf0e50b6faddce3084d0df
-at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
-at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
-at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
-at pages.Banking.deletebank(Banking.java:131)
-at test.BankTest.delete_bank(BankTest.java:37)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.104, chrome: {chromedriverVersion: 149.0.7827.115 (daf70f9ddee..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56037}, goog:processID: 4944, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56037/devtoo..., se:cdpVersion: 149.0.7827.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a12a95d79ab5a9dcaecce404dbdb8f41
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at test.MoneylinkTest.reset_moneylinktransaction(MoneylinkTest.java:48)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -100,11 +107,254 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- delete_bank -->
+        </test-method> <!-- reset_moneylinktransaction -->
+        <test-method signature="single_transaction_accounting()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:52:58 IST" name="single_transaction_accounting" finished-at="2026-06-14T13:53:29 IST" depends-on-methods="test.MoneylinkTest.reset_moneylinktransaction" duration-ms="31113" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- single_transaction_accounting -->
+        <test-method signature="moneylink_quickentry()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:53:29 IST" name="moneylink_quickentry" finished-at="2026-06-14T13:53:44 IST" depends-on-methods="test.MoneylinkTest.single_transaction_accounting" duration-ms="15077" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- moneylink_quickentry -->
+        <test-method signature="CR_Bulkentries()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:53:45 IST" name="CR_Bulkentries" finished-at="2026-06-14T13:54:07 IST" depends-on-methods="test.MoneylinkTest.moneylink_quickentry" duration-ms="22118" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CR_Bulkentries -->
+        <test-method signature="DR_Bulkentries()[pri:0, instance:test.MoneylinkTest@2e570ded]" started-at="2026-06-14T13:54:07 IST" name="DR_Bulkentries" finished-at="2026-06-14T13:54:34 IST" depends-on-methods="test.MoneylinkTest.CR_Bulkentries" duration-ms="27222" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DR_Bulkentries -->
+      </class> <!-- test.MoneylinkTest -->
+      <class name="test.DashboardTest">
+        <test-method is-config="true" signature="setupSuite()[pri:0, instance:test.DashboardTest@21d03963]" started-at="2026-06-14T13:47:59 IST" name="setupSuite" finished-at="2026-06-14T13:48:28 IST" duration-ms="28907" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupSuite -->
+        <test-method is-config="true" signature="init()[pri:0, instance:test.DashboardTest@21d03963]" started-at="2026-06-14T13:48:28 IST" name="init" finished-at="2026-06-14T13:48:28 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="dashboard_module()[pri:0, instance:test.DashboardTest@21d03963]" started-at="2026-06-14T13:48:28 IST" name="dashboard_module" finished-at="2026-06-14T13:48:49 IST" duration-ms="20535" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dashboard_module -->
+        <test-method is-config="true" signature="tearDownSuite()[pri:0, instance:test.DashboardTest@21d03963]" started-at="2026-06-14T13:54:54 IST" name="tearDownSuite" finished-at="2026-06-14T13:54:54 IST" duration-ms="417" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownSuite -->
+      </class> <!-- test.DashboardTest -->
+      <class name="test.BankTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:test.BankTest@3576ddc2]" started-at="2026-06-14T13:48:49 IST" name="init" finished-at="2026-06-14T13:48:49 IST" duration-ms="55" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="OpenBankingModule()[pri:0, instance:test.BankTest@3576ddc2]" started-at="2026-06-14T13:48:49 IST" name="OpenBankingModule" finished-at="2026-06-14T13:48:50 IST" duration-ms="804" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- OpenBankingModule -->
+        <test-method signature="Addbank()[pri:0, instance:test.BankTest@3576ddc2]" started-at="2026-06-14T13:48:50 IST" name="Addbank" finished-at="2026-06-14T13:48:57 IST" depends-on-methods="test.BankTest.OpenBankingModule" duration-ms="7140" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Addbank -->
+        <test-method signature="update_Bank()[pri:0, instance:test.BankTest@3576ddc2]" started-at="2026-06-14T13:48:57 IST" name="update_Bank" finished-at="2026-06-14T13:49:05 IST" depends-on-methods="test.BankTest.Addbank" duration-ms="8137" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- update_Bank -->
+        <test-method signature="deleteBank()[pri:0, instance:test.BankTest@3576ddc2]" started-at="2026-06-14T13:49:05 IST" name="deleteBank" finished-at="2026-06-14T13:49:10 IST" depends-on-methods="test.BankTest.update_Bank" duration-ms="4806" status="FAIL">
+          <exception class="org.openqa.selenium.ElementClickInterceptedException">
+            <message>
+              <![CDATA[element click intercepted: Element <span class="icon-edit cicon editbc_bankin"></span> is not clickable at point (1301, 97). Other element would receive the click: <div class="Toastify__toast-container Toastify__toast-container--top-right">...</div>
+  (Session info: chrome=149.0.7827.104)
+Build info: version: '4.35.0', revision: '1c58e5028b'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a12a95d79ab5a9dcaecce404dbdb8f41, clickElement {id=f.34D4B04284CB97600C2E8F1141B3B352.d.99AEDDC4BBD41285D1F5F115DA721BC1.e.839}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.104, chrome: {chromedriverVersion: 149.0.7827.115 (daf70f9ddee..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56037}, goog:processID: 4944, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56037/devtoo..., se:cdpVersion: 149.0.7827.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a12a95d79ab5a9dcaecce404dbdb8f41)] -> xpath: (//span[@class='icon-edit cicon editbc_bankin'])[last()]]
+Session ID: a12a95d79ab5a9dcaecce404dbdb8f41]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <span class="icon-edit cicon editbc_bankin"></span> is not clickable at point (1301, 97). Other element would receive the click: <div class="Toastify__toast-container Toastify__toast-container--top-right">...</div>
+  (Session info: chrome=149.0.7827.104)
+Build info: version: '4.35.0', revision: '1c58e5028b'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a12a95d79ab5a9dcaecce404dbdb8f41, clickElement {id=f.34D4B04284CB97600C2E8F1141B3B352.d.99AEDDC4BBD41285D1F5F115DA721BC1.e.839}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.104, chrome: {chromedriverVersion: 149.0.7827.115 (daf70f9ddee..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56037}, goog:processID: 4944, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56037/devtoo..., se:cdpVersion: 149.0.7827.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (a12a95d79ab5a9dcaecce404dbdb8f41)] -> xpath: (//span[@class='icon-edit cicon editbc_bankin'])[last()]]
+Session ID: a12a95d79ab5a9dcaecce404dbdb8f41
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:51)
+at jdk.proxy2/jdk.proxy2.$Proxy15.click(Unknown Source)
+at pages.BankingPage.deletebank(BankingPage.java:146)
+at test.BankTest.deleteBank(BankTest.java:54)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.ElementClickInterceptedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBank -->
       </class> <!-- test.BankTest -->
-    </test> <!-- Sanity Testing -->
-  </suite> <!-- Sanity Suite -->
+      <class name="test.SnapshotTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:49:10 IST" name="init" finished-at="2026-06-14T13:49:10 IST" duration-ms="41" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="createSnapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:49:10 IST" name="createSnapshot" finished-at="2026-06-14T13:49:23 IST" duration-ms="13063" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createSnapshot -->
+        <test-method signature="delete_snapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:49:23 IST" name="delete_snapshot" finished-at="2026-06-14T13:49:30 IST" depends-on-methods="test.SnapshotTest.createSnapshot" duration-ms="6739" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- delete_snapshot -->
+        <test-method signature="ExcelImport()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:49:30 IST" name="ExcelImport" finished-at="2026-06-14T13:49:59 IST" depends-on-methods="test.SnapshotTest.delete_snapshot" duration-ms="29088" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExcelImport -->
+        <test-method signature="Snapshot_quickentry()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:49:59 IST" name="Snapshot_quickentry" finished-at="2026-06-14T13:50:17 IST" depends-on-methods="test.SnapshotTest.ExcelImport" duration-ms="17939" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Snapshot_quickentry -->
+        <test-method signature="bulkaction()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:50:17 IST" name="bulkaction" finished-at="2026-06-14T13:50:35 IST" depends-on-methods="test.SnapshotTest.Snapshot_quickentry" duration-ms="17769" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- bulkaction -->
+        <test-method signature="Bulk_Upload()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:50:35 IST" name="Bulk_Upload" finished-at="2026-06-14T13:51:40 IST" depends-on-methods="test.SnapshotTest.bulkaction" duration-ms="65084" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Bulk_Upload -->
+        <test-method signature="Delete_SelectedSnapshot()[pri:0, instance:test.SnapshotTest@35b74c5c]" started-at="2026-06-14T13:51:40 IST" name="Delete_SelectedSnapshot" finished-at="2026-06-14T13:51:56 IST" depends-on-methods="test.SnapshotTest.Bulk_Upload" duration-ms="15751" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Delete_SelectedSnapshot -->
+      </class> <!-- test.SnapshotTest -->
+      <class name="test.UpdatedetailsTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:test.UpdatedetailsTest@81d9a72]" started-at="2026-06-14T13:54:37 IST" name="init" finished-at="2026-06-14T13:54:37 IST" duration-ms="157" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="update_accountdetails()[pri:0, instance:test.UpdatedetailsTest@81d9a72]" started-at="2026-06-14T13:54:37 IST" name="update_accountdetails" finished-at="2026-06-14T13:54:54 IST" duration-ms="16466" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- update_accountdetails -->
+      </class> <!-- test.UpdatedetailsTest -->
+      <class name="test.ReportsTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:test.ReportsTest@b86de0d]" started-at="2026-06-14T13:54:34 IST" name="init" finished-at="2026-06-14T13:54:34 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="Export_Report()[pri:0, instance:test.ReportsTest@b86de0d]" started-at="2026-06-14T13:54:34 IST" name="Export_Report" finished-at="2026-06-14T13:54:37 IST" duration-ms="3317" status="FAIL">
+          <exception class="org.openqa.selenium.interactions.MoveTargetOutOfBoundsException">
+            <message>
+              <![CDATA[move target out of bounds
+  (Session info: chrome=149.0.7827.104)
+Build info: version: '4.35.0', revision: '1c58e5028b'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a12a95d79ab5a9dcaecce404dbdb8f41, actions {actions=[org.openqa.selenium.interactions.Sequence@50d02417]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.104, chrome: {chromedriverVersion: 149.0.7827.115 (daf70f9ddee..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56037}, goog:processID: 4944, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56037/devtoo..., se:cdpVersion: 149.0.7827.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a12a95d79ab5a9dcaecce404dbdb8f41]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.interactions.MoveTargetOutOfBoundsException: move target out of bounds
+  (Session info: chrome=149.0.7827.104)
+Build info: version: '4.35.0', revision: '1c58e5028b'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a12a95d79ab5a9dcaecce404dbdb8f41, actions {actions=[org.openqa.selenium.interactions.Sequence@50d02417]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 149.0.7827.104, chrome: {chromedriverVersion: 149.0.7827.115 (daf70f9ddee..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56037}, goog:processID: 4944, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56037/devtoo..., se:cdpVersion: 149.0.7827.104, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a12a95d79ab5a9dcaecce404dbdb8f41
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+at org.openqa.selenium.remote.RemoteWebDriver.perform(RemoteWebDriver.java:643)
+at org.openqa.selenium.interactions.Actions$BuiltAction.perform(Actions.java:616)
+at org.openqa.selenium.interactions.Actions.perform(Actions.java:581)
+at pages.Reports.reports(Reports.java:63)
+at test.ReportsTest.Export_Report(ReportsTest.java:28)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.interactions.MoveTargetOutOfBoundsException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Export_Report -->
+      </class> <!-- test.ReportsTest -->
+    </test> <!-- SanityTest -->
+  </suite> <!-- Suite -->
 </testng-results>

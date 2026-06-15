@@ -4,7 +4,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import pages.Banking;
+
+import pages.BaseTest;
 import pages.Reports;
 
 public class ReportsTest extends BaseTest {
@@ -12,7 +13,7 @@ public class ReportsTest extends BaseTest {
 	Reports rp;
 	SoftAssert soft;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void init() {
 		try {
 			rp = new Reports(driver);
@@ -22,7 +23,7 @@ public class ReportsTest extends BaseTest {
 		}
 	}
 
-	@Test
+	@Test(groups = { "sanity" , "Regression" })
 	public void Export_Report() throws InterruptedException {
 		rp.reports();
 

@@ -214,6 +214,17 @@ public class ReadConfigFile {
 
 		}
 	}
+	
+
+	public String getReimbursementExcelImportPath() {
+		String ReimbursementExcelPath = properties.getProperty("ReimbursementExcelImportpath");
+		if (ReimbursementExcelPath != null) {
+			return ReimbursementExcelPath;
+		} else {
+			throw new RuntimeException("ReimbursementExcelImportpath is not specified in config file");
+
+		}
+	}
 
 	public String getaddbank() {
 		String addbank = properties.getProperty("addbank");
@@ -354,5 +365,16 @@ public class ReadConfigFile {
 
 		}
 	}
+	
+	public String getselectbankforexport() {
+		String bankselectionforexport = properties.getProperty("selectbankforexport");
+		if (bankselectionforexport != null) {
+			return bankselectionforexport;
+		} else {
+			throw new RuntimeException("bankselectionforexport is not specified in config file");
+
+		}
+	}
+
 
 }

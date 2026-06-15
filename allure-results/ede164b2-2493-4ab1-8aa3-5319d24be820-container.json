@@ -1,0 +1,1 @@
+{"uuid":"ede164b2-2493-4ab1-8aa3-5319d24be820","name":"test.SnapshotTest","children":["9512ab5a-1f08-4625-a963-93128704dbd3"],"befores":[{"name":"init","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1779773502137,"stop":1779773502169}],"afters":[],"start":1779773485179,"stop":1779773504024}

@@ -24,9 +24,6 @@ public class Dashboard {
 
 	// Constructor
 	public Dashboard(WebDriver driver) throws FileNotFoundException, AWTException {
-		// WebDriverManager.chromedriver().setup();
-		// driver = new ChromeDriver();
-		// driver.manage().window().maximize();
 		this.driver = driver;
 
 		js = (JavascriptExecutor) driver;

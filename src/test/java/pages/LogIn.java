@@ -11,6 +11,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,6 +27,7 @@ public class LogIn {
 	// Constructor
 	public LogIn(WebDriver driver) throws FileNotFoundException, AWTException {
 		this.driver = driver;
+		PageFactory.initElements(driver, this);
 		js = (JavascriptExecutor) driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(100));
 		config = new ReadConfigFile();
@@ -33,33 +36,54 @@ public class LogIn {
 
 	}
 
+	@FindBy(name = "emailId")
+	WebElement accountcode_emailid;
+
+	@FindBy(name = "username")
+	WebElement username;
+
+	@FindBy(name = "password")
+	WebElement password;
+
+	@FindBy(tagName = "button")
+	WebElement Loginbutton;
+
+	@FindBy(xpath = "//li[@class='main-h-profile']//div[@id='dropdown-basic']")
+	WebElement myprofile;
+
+	@FindBy(css = ".p-0.h-ul-entities-list.white-bg > li div.drp-entity-name")
+	List<WebElement> listofEntities;
+
 	// Method for login
 
-	public void performLogin() throws InterruptedException {
+	public void openURL() {
 		driver.get(config.getURL());
-		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-		driver.findElement(By.name("emailId")).sendKeys(config.getaccountcode());
-		driver.findElement(By.name("username")).sendKeys(config.getusername());
-		driver.findElement(By.name("password")).sendKeys(config.getpassword());
-		driver.findElement(By.tagName("button")).click();
-		System.out.println("Login Successful");
+	}
+
+	public void performLogin() {
+
+		accountcode_emailid.sendKeys(config.getaccountcode());
+		username.sendKeys(config.getusername());
+		password.sendKeys(config.getpassword());
+		Loginbutton.click();
 	}
 
 	public void entityselection() throws InterruptedException {
 
-		// For entity selection
 		Thread.sleep(2500);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
 
-		WebElement profile = driver.findElement(By.xpath("//li[@class='main-h-profile']//div[@id='dropdown-basic']"));
-		wait.until(ExpectedConditions.elementToBeClickable(profile)).click();
-		List<WebElement> entities = driver
-				.findElements(By.cssSelector(".p-0.h-ul-entities-list.white-bg > li div.drp-entity-name"));
+		wait.until(ExpectedConditions.elementToBeClickable(myprofile)).click();
 
-		for (WebElement entity : entities) {
+		for (WebElement entity : listofEntities) {
 			String entityText = entity.getText().trim();
 			// System.out.println(entityText);
-
 			if (entityText.equalsIgnoreCase(config.getentityname().trim())) {
 				entity.click();
 				break;

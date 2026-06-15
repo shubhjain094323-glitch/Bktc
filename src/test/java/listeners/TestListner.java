@@ -12,7 +12,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-import test.BaseTest;
+import pages.BaseTest;
 import utils.Screenshots;
 
 public class TestListner extends BaseTest implements ITestListener {
@@ -54,6 +54,8 @@ public class TestListner extends BaseTest implements ITestListener {
 
 	public void onTestFailure(ITestResult Result) {
 		System.out.println("Name of the Failed Test is " + Result.getName());
+		
+		System.out.println("Driver in Listener: " + driver);
 
 		String testname = Result.getName();
 
