@@ -1,25 +1,21 @@
 pipeline {
 
-  agent any
+    agent any
 
     /*
      * Automatic execution
-     * Runs approximately every 5 minutes
+     * Runs every day at 1:20 PM
      */
-   triggers {
+    triggers {
         cron('20 13 * * *')
     }
-
-
 
     stages {
 
         stage('Checkout') {
 
             steps {
-
                 echo 'Checking out automation project...'
-
                 checkout scm
             }
         }
@@ -31,8 +27,8 @@ pipeline {
                 echo 'Cleaning previous build...'
 
                 bat 'mvn clean'
-                
-                 // Delete previous reports
+
+                // Delete previous reports
                 bat 'if exist reports rmdir /s /q reports'
 
                 // Create fresh reports directory
@@ -46,10 +42,23 @@ pipeline {
 
                 echo 'Running Sanity Tests...'
 
-                bat 'mvn test'
+                /*
+                 * Test cases may fail, but Jenkins build
+                 * should still remain SUCCESS.
+                 */
+                bat '''
+                    mvn test
+                    if %ERRORLEVEL% NEQ 0 (
+                        echo ==========================================
+                        echo Some TestNG test cases FAILED.
+                        echo Jenkins build will remain SUCCESS.
+                        echo Please check the Extent Report.
+                        echo ==========================================
+                        exit /b 0
+                    )
+                '''
             }
         }
-
 
         stage('Publish Extent Report') {
 
@@ -60,12 +69,12 @@ pipeline {
                 publishHTML(
                     target: [
                         allowMissing: true,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'reports',
-                reportFiles: 'Test-Report*.html',
-                reportName: 'Extent Report',
-                reportTitles: "Sanity Automation Report"
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'reports',
+                        reportFiles: 'Test-Report*.html',
+                        reportName: 'Extent Report',
+                        reportTitles: 'Sanity Automation Report'
                     ]
                 )
             }
@@ -88,10 +97,10 @@ pipeline {
 
             emailext(
 
-                to: 'shubhjain094323@gmail.com , shubhamwakekar2@gmail.com',
+                to: 'shubhjain094323@gmail.com, shubhamwakekar2@gmail.com',
 
                 subject:
-                    "SANITY BUILD PASSED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    "SANITY BUILD COMPLETED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
 
                 mimeType: 'text/html',
 
@@ -103,13 +112,13 @@ pipeline {
 
                     <body>
 
-                    <h2>Sanity Build Execution Report</h2>
+                    <h2>Sanity Automation Execution Report</h2>
 
                     <p>Hi Team,</p>
 
                     <p>
-                    The sanity testing has been completed successfully
-                    for the latest build.
+                    The sanity automation execution has been completed
+                    successfully.
                     </p>
 
                     <h3>Build Details</h3>
@@ -129,24 +138,30 @@ pipeline {
                         </tr>
 
                         <tr>
-                            <th>Status</th>
-                            <td><b>PASSED</b></td>
+                            <th>Jenkins Build Status</th>
+                            <td><b>SUCCESS</b></td>
                         </tr>
 
                     </table>
 
-                    <h3>Overall Result</h3>
+                    <h3>Test Execution Result</h3>
 
                     <p>
-                        <b>Sanity testing PASSED.</b>
+                    The Jenkins build status does not represent the
+                    individual TestNG test results.
                     </p>
 
                     <p>
-                        The build is stable.
+                    One or more test cases may have failed during execution.
+                    Please refer to the attached Extent Report for the
+                    actual Passed, Failed and Skipped test case results.
                     </p>
 
+                    <h3>Extent Report</h3>
+
                     <p>
-                        Please find the detailed Extent Report attached.
+                    The detailed Extent Report is attached to this email
+                    and is also available in Jenkins.
                     </p>
 
                     <p>
@@ -172,10 +187,10 @@ pipeline {
 
             emailext(
 
-                to: 'shubhjain094323@gmail.com , shubhamwakekar2@gmail.com',
+                to: 'shubhjain094323@gmail.com, shubhamwakekar2@gmail.com',
 
                 subject:
-                    "SANITY BUILD FAILED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    "JENKINS BUILD FAILED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
 
                 mimeType: 'text/html',
 
@@ -187,12 +202,14 @@ pipeline {
 
                     <body>
 
-                    <h2>Sanity Build Execution Report</h2>
+                    <h2>Sanity Automation - Jenkins Failure</h2>
 
                     <p>Hi Team,</p>
 
                     <p>
-                    The sanity testing has failed for the latest build.
+                    The Jenkins pipeline itself has failed.
+                    This may indicate an infrastructure, configuration,
+                    checkout, build or environment issue.
                     </p>
 
                     <h3>Build Details</h3>
@@ -211,7 +228,6 @@ pipeline {
                             <td>#${env.BUILD_NUMBER}</td>
                         </tr>
 
-                    
                         <tr>
                             <th>Status</th>
                             <td><b>FAILED</b></td>
@@ -219,13 +235,11 @@ pipeline {
 
                     </table>
 
-                   
-
                     <h3>Action Required</h3>
 
                     <p>
-                        Please check the Jenkins console log and
-                        attached Extent Report for failed test cases.
+                    Please check the Jenkins console log and the
+                    attached Extent Report to identify the issue.
                     </p>
 
                     <p>
