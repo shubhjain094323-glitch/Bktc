@@ -88,7 +88,7 @@ pipeline {
 
             emailext(
 
-                to: 'shubhjain094323@gmail.com','shubhamwakekar2@gmail.com'
+                to: 'shubhjain094323@gmail.com','shubhamwakekar2@gmail.com',
 
                 subject:
                     "SANITY BUILD PASSED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
@@ -172,7 +172,7 @@ pipeline {
 
             emailext(
 
-                to: 'shubhjain094323@gmail.com', 'shubhamwakekar2@gmail.com'
+                to: 'shubhjain094323@gmail.com', 'shubhamwakekar2@gmail.com',
 
                 subject:
                     "SANITY BUILD FAILED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
