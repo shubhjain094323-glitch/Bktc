@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utils.ReadConfigFile;
+
 public class Reports {
 
 	WebDriver driver;
@@ -24,6 +28,7 @@ public class Reports {
 	ReadConfigFile config;
 	Actions actions;
 	Robot robot;
+	Logger logger;
 
 	// Constructor
 	public Reports(WebDriver driver) throws FileNotFoundException, AWTException {
@@ -33,8 +38,9 @@ public class Reports {
 		js = (JavascriptExecutor) driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		config = new ReadConfigFile();
-		actions = new Actions(driver);
+		// actions = new Actions(driver);
 		robot = new Robot();
+		logger = LogManager.getLogger(this.getClass());
 	}
 
 	@FindBy(xpath = "//div[@class='quick-menu']//a[@href='/reports']")
@@ -54,13 +60,13 @@ public class Reports {
 
 	public void reports() throws InterruptedException {
 
-//		WebElement reportsLink = wait.until(
-//				ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='quick-menu']//a[@href='/reports']")));
+		logger.info("Redirecting to the Report Module");
+
 		gotoreportmodule.click();
 
 		Thread.sleep(3000);
 
-		actions.moveByOffset(200, 400).click().perform();
+		js.executeScript("window.scrollBy(100,200)");
 
 		String exportdata = config.getExportsfields();
 		System.out.println("Export data is = " + exportdata);
@@ -74,15 +80,8 @@ public class Reports {
 
 			selectBank.click();
 
-//			wait.until(
-//					ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class,'MuiList-root')]")));
-//
 			String bankName = config.getselectbankforexport();
 			System.out.println("Bank selected: " + bankName);
-//			WebElement bankOption = wait.until(ExpectedConditions
-//					.elementToBeClickable(By.xpath("//li[contains(normalize-space(),'" + bankName + "')]")));
-//			System.out.println("Selected bank - " + bankOption);
-//			bankOption.click();
 
 			for (WebElement banks : listof_bank) {
 
@@ -109,6 +108,8 @@ public class Reports {
 
 		// Click Export button
 		clickon_Export.click();
+
+		logger.info("Export the" + exportdata + "data successfully");
 		Thread.sleep(3000);
 	}
 

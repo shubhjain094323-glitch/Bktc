@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import utils.RandomData;
+import utils.ReadConfigFile;
 
 public class Reimbursement {
 
@@ -27,6 +32,7 @@ public class Reimbursement {
 	Actions actions;
 	Robot robot;
 	RandomData random;
+	Logger logger;
 
 	public Reimbursement(WebDriver driver) throws Exception {
 		this.driver = driver;
@@ -40,6 +46,7 @@ public class Reimbursement {
 		actions = new Actions(driver);
 		robot = new Robot();
 		random = new RandomData();
+		logger = LogManager.getLogger(this.getClass());
 
 	}
 
@@ -116,11 +123,10 @@ public class Reimbursement {
 		ClickOnHamburger.click();
 		Thread.sleep(2000);
 
+		logger.info("Checking the reimbursement module is enabled");
+
 		for (WebElement menu : listofMenus) {
 			String menulist = menu.getText().trim();
-			// System.out.println("Menu list " + menulist);
-
-			// System.out.println(menulist);
 
 			if (menulist.contains("ReImbursement")) {
 				// ClickOnReimbursement.click();
@@ -134,6 +140,7 @@ public class Reimbursement {
 			System.out
 					.println("Reimbursement is not enabled for the entity. Please enable it from Profile Management.");
 			return;
+
 		}
 
 		wait.until(ExpectedConditions.elementToBeClickable(ContextMenu_Reimbursement)).click();
@@ -207,11 +214,9 @@ public class Reimbursement {
 
 	public void Delete_Reimbursement() throws InterruptedException {
 
-	
-
 		Thread.sleep(4000);
 		wait.until(ExpectedConditions.elementToBeClickable(selectTimePeriod)).click();
-	//	selectTimePeriod.click();
+		// selectTimePeriod.click();
 		SinceBeginning.click();
 
 		wait.until(ExpectedConditions.elementToBeClickable(ContextMenu_Reimbursement)).click();

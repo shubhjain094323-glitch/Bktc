@@ -7,10 +7,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import pages.BaseTest;
+import base.BaseTestUpdated;
 import pages.Reimbursement;
 
-public class ReimbursementTest extends BaseTest {
+public class ReimbursementTest extends BaseTestUpdated {
 
 	Reimbursement rb;
 

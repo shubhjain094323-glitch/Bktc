@@ -4,10 +4,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import pages.BaseTest;
+import base.BaseTestUpdated;
 import pages.Updatedetails;
 
-public class UpdatedetailsTest extends BaseTest {
+public class UpdatedetailsTest extends BaseTestUpdated {
 
 	Updatedetails ud;
 	SoftAssert soft;
@@ -22,7 +22,7 @@ public class UpdatedetailsTest extends BaseTest {
 		}
 	}
 
-	@Test(groups = { "sanity" , "regression" })
+	@Test(priority = 1, groups = { "sanity", "regression" })
 	public void update_accountdetails() throws InterruptedException {
 		ud.updateaccountdetails();
 		String actualupdate = ud.getToastMessage();
@@ -31,25 +31,7 @@ public class UpdatedetailsTest extends BaseTest {
 
 	}
 
-	@Test(dependsOnMethods = "update_accountdetails" , groups = { "regression" })
-	public void update_entity() throws InterruptedException {
-		ud.entityupdate();
-		String actualentityupdate = ud.getToastMessage();
-		System.out.println("Entity update toast " + actualentityupdate);
-		soft.assertTrue(actualentityupdate.contains("Entity updated"), "Entity is not updated please check once");
-
-	}
-
-	@Test(dependsOnMethods = "update_entity", groups = { "regression" })
-	public void update_user() throws InterruptedException {
-		ud.userupdate();
-		String actualuserupdate = ud.getToastMessage();
-		System.out.println("Entity update toast " + actualuserupdate);
-		soft.assertTrue(actualuserupdate.contains("User Updated"), "User is not updated please check once");
-
-	}
-
-	@Test(groups = { "regression" })
+//	@Test(priority = 2, groups = { "regression" })
 	public void Create_Entity() throws InterruptedException {
 
 		ud.Create_entity();
@@ -59,7 +41,16 @@ public class UpdatedetailsTest extends BaseTest {
 		soft.assertAll();
 	}
 
-	@Test (groups = { "regression" })
+//	@Test(priority = 3, groups = { "regression" })
+	public void update_entity() throws InterruptedException {
+		ud.entityupdate();
+		String actualentityupdate = ud.getToastMessage();
+		System.out.println("Entity update toast " + actualentityupdate);
+		soft.assertTrue(actualentityupdate.contains("Entity updated"), "Entity is not updated please check once");
+
+	}
+
+//	@Test(priority = 4, groups = { "regression" })
 	public void Delete_Entity() throws InterruptedException {
 
 		ud.delete_entity();
@@ -70,13 +61,22 @@ public class UpdatedetailsTest extends BaseTest {
 
 	}
 
-	@Test (groups = { "regression" })
+//	@Test(priority = 5, groups = { "regression" })
 	public void Create_user() throws InterruptedException {
 		ud.Create_user();
 		String actulusercreate = ud.getToastMessage();
 		System.out.println("Create User toast " + actulusercreate);
 		soft.assertTrue(actulusercreate.contains("User Added"), "User is not created successfully");
 		soft.assertAll();
+	}
+
+//	@Test(priority = 6, dependsOnMethods = "update_entity", groups = { "regression" })
+	public void update_user() throws InterruptedException {
+		ud.userupdate();
+		String actualuserupdate = ud.getToastMessage();
+		System.out.println("Entity update toast " + actualuserupdate);
+		soft.assertTrue(actualuserupdate.contains("User Updated"), "User is not updated please check once");
+
 	}
 
 }

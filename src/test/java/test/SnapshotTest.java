@@ -2,19 +2,16 @@ package test;
 
 import java.awt.AWTException;
 import java.io.FileNotFoundException;
-import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import pages.BaseTest;
+import base.BaseTestUpdated;
 import pages.Snapshot;
 
-public class SnapshotTest extends BaseTest {
+public class SnapshotTest extends BaseTestUpdated {
 
 	Snapshot sp;
 
@@ -54,39 +51,37 @@ public class SnapshotTest extends BaseTest {
 		String actualexcelimport = sp.getToastMessage();
 		System.out.println("Excel import snapshot -" + actualexcelimport);
 		soft.assertTrue(actualexcelimport.contains("Email sent"), "Excel import uploaded file email is not sent");
+		// soft.assertEquals(true, true);
 		soft.assertAll();
 
 	}
 
-	@Test(dependsOnMethods = "ExcelImport", alwaysRun = true, groups = { "sanity", "regression" })
+	@Test(dependsOnMethods = "delete_snapshot", alwaysRun = true, groups = { "sanity", "regression" })
 	public void Snapshot_quickentry() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
-		boolean executed = sp.snapshotquickentry();
-		if (executed) {
-			String actualquickentrytoast = sp.getToastMessage();
-			System.out.println("Quick entry - " + actualquickentrytoast);
-			soft.assertTrue(actualquickentrytoast.contains("ledger entries saved"),
-					"Quick entry toast is not displyed, please check");
-		} else {
-			System.out.println("Quick entry not supported for this entity, please check the entity level setting");
-		}
+		String actualquickentry = sp.snapshotquickentry();
+		String expectedquickentry = "Snapshot ledger entries saved successfully";
+
+		soft.assertEquals(actualquickentry, expectedquickentry);
+		// soft.assertEquals(true, true);
+
 		soft.assertAll();
 	}
 
 	@Test(dependsOnMethods = "Snapshot_quickentry", alwaysRun = true, groups = { "sanity", "regression" })
 	public void bulkaction() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
-		sp.bulkaction();
-//		String actualbullkaction = driver
-//				.findElement(By.xpath("//div[contains(@class,'modal-content')]//p[text()='Successful']")).getText();
-//		System.out.println("Bulk action -" + actualbullkaction);
-		soft.assertEquals(true, true);
+		String actual = sp.bulkaction();
+
+		String expected = "Successful";
+		// soft.assertEquals(true, true);
+
+		soft.assertEquals(actual, expected, "Bulk action status is not as expected");
 		soft.assertAll();
 
 	}
 
 	@Test(dependsOnMethods = "bulkaction", alwaysRun = true, groups = { "sanity", "regression" })
-
 	public void Bulk_Upload() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 		sp.bulkuploadsnapshot();

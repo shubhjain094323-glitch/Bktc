@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import net.bytebuddy.asm.MemberSubstitution.FieldValue;
+import utils.RandomData;
+import utils.ReadConfigFile;
 
 public class Updatedetails {
 
@@ -126,6 +128,187 @@ public class Updatedetails {
 	@FindBy(xpath = "//div[@class='Select type-select __option css-18we6dg-option']")
 	List<WebElement> listof_userroles;
 
+	@FindBy(xpath = "//div[contains(@class,'Toastify__toast-body')]")
+	WebElement toastmsg;
+
+	public void updateaccountdetails() throws InterruptedException {
+
+		Hamburgermenu.click();
+
+		clickon_ProfileManagement.click();
+		Thread.sleep(1000);
+
+		Clickon_EditIcon.click();
+
+		edit_accountName.clear();
+		edit_accountName.sendKeys(rd.getAccountname());
+		Thread.sleep(1000);
+
+		edit_phoneNumber.clear();
+		Thread.sleep(1000);
+		edit_phoneNumber.sendKeys(rd.getphonenum());
+		Thread.sleep(1000);
+
+		edit_gstNumber.clear();
+		edit_gstNumber.sendKeys(rd.getpartygstin());
+		Thread.sleep(1000);
+
+		Clickon_update.click();
+		// Thread.sleep(5000);
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
+
+	}
+
+	public void Create_entity() throws InterruptedException {
+
+		Hamburgermenu.click();
+
+		clickon_ProfileManagement.click();
+		// Thread.sleep(1500);
+
+		clickonCreate_singleEntity.click();
+
+		js.executeScript("window.scrollBy(0,-300)");
+
+		// Thread.sleep(2000);
+
+		wait.until(ExpectedConditions.visibilityOf(Enter_EntityName));
+
+		// Enter_EntityName.sendKeys(rd.getpartyname());
+
+		Enter_EntityName.sendKeys(entityName);
+
+		System.out.println("Entity Name is " + entityName);
+
+		Clickon_StateDropdown.click();
+
+		Thread.sleep(2000);
+
+		boolean stateFound = false;
+
+		// System.out.println(listof_states.size());
+
+		for (WebElement states : listof_states) {
+
+			String stateName = states.getText().trim();
+
+			if (stateName.equalsIgnoreCase("Maharashtra")) {
+
+				states.click();
+				stateFound = true;
+				break;
+			}
+		}
+
+		if (!stateFound) {
+			System.out.println("Invalid State");
+		}
+
+		js.executeScript("window.scrollBy(0, 700)");
+
+		Clickon_save.click();
+
+		clickon_yes.click();
+
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
+
+	}
+
+	public void entityupdate() throws InterruptedException {
+
+		// Entity Update
+		// Hamburgermenu.click();
+
+		// clickon_ProfileManagement.click();
+		// Thread.sleep(1500);
+
+		js.executeScript("window.scrollBy(0,-300)");
+
+		wait.until(ExpectedConditions.elementToBeClickable(clickon_Entities)).click();
+
+		Clickon_StateDropdown.click();
+
+		// clickon_Entities.click();
+
+		for (WebElement entities : listof_Entities) {
+			String entity = entities.getText().trim();
+			System.out.println("Entities " + entity);
+			Thread.sleep(1000);
+			// js.executeScript("window.scrollBy(0, 800)");
+			if (entity.equalsIgnoreCase(entityName)) {
+				entities.click();
+				break;
+			}
+
+		}
+		Thread.sleep(2000);
+
+		js.executeScript("window.scrollBy(0, -300)");
+
+		boolean stateFound = false;
+
+		// System.out.println(listof_states.size());
+
+		for (WebElement updatedstates : listof_states) {
+
+			String stateName = updatedstates.getText().trim();
+
+			if (stateName.equalsIgnoreCase("Goa")) {
+
+				updatedstates.click();
+				stateFound = true;
+				break;
+			}
+		}
+
+		if (!stateFound) {
+			System.out.println("Invalid State");
+		}
+
+		js.executeScript("window.scrollBy(0, 800)");
+
+		WebElement updateEntity = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Update']")));
+		updateEntity.click();
+
+		driver.findElement(By.xpath("//button[normalize-space()='Yes']")).click();
+
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
+
+	}
+
+	public void delete_entity() throws InterruptedException {
+
+		Thread.sleep(1500);
+
+		js.executeScript("window.scrollBy(0,-500)");
+
+		wait.until(ExpectedConditions.elementToBeClickable(clickon_Entities)).click();
+
+		for (WebElement entities : listof_Entities) {
+			String entity = entities.getText().trim();
+			System.out.println(entity);
+			Thread.sleep(1000);
+			js.executeScript("window.scrollBy(0, 400)");
+			if (entity.equalsIgnoreCase(entityName)) {
+				entities.click();
+				break;
+			}
+
+		}
+
+		js.executeScript("window.scrollBy(0, 800)");
+
+		clickon_deleteEntity.click();
+
+		Thread.sleep(1500);
+
+		clickon_YesForDelete.click();
+
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
+
+	}
+
 	public void Create_user() throws InterruptedException {
 
 		Hamburgermenu.click();
@@ -174,158 +357,7 @@ public class Updatedetails {
 			}
 		}
 
-	}
-
-	public void Create_entity() throws InterruptedException {
-
-		Hamburgermenu.click();
-
-		clickon_ProfileManagement.click();
-		Thread.sleep(1500);
-
-		clickonCreate_singleEntity.click();
-
-		js.executeScript("window.scrollBy(0,-300)");
-
-		Thread.sleep(2000);
-
-		wait.until(ExpectedConditions.visibilityOf(Enter_EntityName));
-
-		// Enter_EntityName.sendKeys(rd.getpartyname());
-
-		Enter_EntityName.sendKeys(entityName);
-
-		System.out.println("Entity Name is " + entityName);
-
-		Clickon_StateDropdown.click();
-
-		Thread.sleep(2000);
-
-		boolean stateFound = false;
-
-		// System.out.println(listof_states.size());
-
-		for (WebElement states : listof_states) {
-
-			String stateName = states.getText().trim();
-
-			if (stateName.equalsIgnoreCase("Maharashtra")) {
-
-				states.click();
-				stateFound = true;
-				break;
-			}
-		}
-
-		if (!stateFound) {
-			System.out.println("Invalid State");
-		}
-
-		js.executeScript("window.scrollBy(0, 700)");
-
-		Clickon_save.click();
-
-		clickon_yes.click();
-
-		Thread.sleep(3500);
-
-	}
-
-	public void delete_entity() throws InterruptedException {
-
-		Thread.sleep(1500);
-
-		js.executeScript("window.scrollBy(0,-500)");
-
-		wait.until(ExpectedConditions.elementToBeClickable(clickon_Entities)).click();
-
-		for (WebElement entities : listof_Entities) {
-			String entity = entities.getText().trim();
-			System.out.println(entity);
-			Thread.sleep(1000);
-			js.executeScript("window.scrollBy(0, 400)");
-			if (entity.equalsIgnoreCase(entityName)) {
-				entities.click();
-				break;
-			}
-
-		}
-
-		js.executeScript("window.scrollBy(0, 800)");
-
-		clickon_deleteEntity.click();
-
-		clickon_YesForDelete.click();
-
-	}
-
-	public void updateaccountdetails() throws InterruptedException {
-
-		Hamburgermenu.click();
-
-		clickon_ProfileManagement.click();
-		Thread.sleep(1500);
-
-		Clickon_EditIcon.click();
-
-		edit_accountName.clear();
-		edit_accountName.sendKeys(rd.getAccountname());
-		Thread.sleep(1500);
-
-		edit_phoneNumber.clear();
-		Thread.sleep(1000);
-		edit_phoneNumber.sendKeys(rd.getphonenum());
-		Thread.sleep(1500);
-
-		edit_gstNumber.clear();
-		edit_gstNumber.sendKeys(rd.getpartygstin());
-		Thread.sleep(1500);
-
-		Clickon_update.click();
-		Thread.sleep(5000);
-
-	}
-
-	public void entityupdate() throws InterruptedException {
-
-		// Entity Update
-		Hamburgermenu.click();
-
-		clickon_ProfileManagement.click();
-		Thread.sleep(1500);
-
-		for (WebElement entities : listof_Entities) {
-			String entity = entities.getText().trim();
-			System.out.println(entity);
-			Thread.sleep(1000);
-			js.executeScript("window.scrollBy(0, 800)");
-			if (entity.equalsIgnoreCase(config.getEntityselection().trim())) {
-				entities.click();
-				break;
-			}
-
-		}
-		Thread.sleep(2000);
-
-		js.executeScript("window.scrollBy(0, -300)");
-
-		WebElement entityType = driver.findElement(By.xpath(
-				"//div[@class='col-xl-12']//div[@class='row']//div[@class='col-xl-3 col-lg-3 col-md-3']//div[@class='Select type-select __value-container Select type-select __value-container--has-value css-1hwfws3']"));
-		entityType.click();
-		Thread.sleep(1000);
-		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-		// entityType.sendKeys("Partnership Firm");
-		Thread.sleep(1500);
-
-		js.executeScript("window.scrollBy(0, 800)");
-
-		WebElement updateEntity = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Update']")));
-		updateEntity.click();
-
-		// driver.findElement(By.xpath("//span[@class='icon-Cross-with-grey-circle']")).click();
-
-		System.out.println("Entity updated successfully");
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
 
 	}
 
@@ -350,15 +382,14 @@ public class Updatedetails {
 				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save']")));
 		updateuser.click();
 
-		System.out.println("User updated successfully");
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
+
+		// System.out.println("User updated successfully");
 	}
 
 	public String getToastMessage() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		return wait
-				.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//div[contains(@class,'Toastify__toast-body')]")))
-				.getText();
+		return wait.until(ExpectedConditions.visibilityOf(toastmsg)).getText().trim();
 	}
 
 }

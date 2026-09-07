@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="SanityTest(failed)">
-    <groups>
-      <run>
-        <include name="sanity"/>
-      </run>
-    </groups>
+  <listeners>
+    <listener class-name="listeners.Listners_For_CrossBrowser"/>
+  </listeners>
+  <test thread-count="5" name="EdgeTest(failed)">
+    <parameter name="headless" value="false"/>
+    <parameter name="os" value="windows"/>
+    <parameter name="browser" value="Edge"/>
     <classes>
-      <class name="test.BankTest">
-        <methods>
-          <include name="Addbank"/>
-          <include name="OpenBankingModule"/>
-          <include name="update_Bank"/>
-          <include name="tearDownSuite"/>
-          <include name="deleteBank"/>
-          <include name="init"/>
-          <include name="setupSuite"/>
-        </methods>
-      </class> <!-- test.BankTest -->
       <class name="test.MoneylinkTest">
         <methods>
-          <include name="tearDownSuite"/>
+          <include name="single_transaction_accounting"/>
           <include name="open_moneylink"/>
+          <include name="TearDown"/>
+          <include name="moneylink_quickentry"/>
+          <include name="SetUp"/>
           <include name="reset_moneylinktransaction"/>
-          <include name="setupSuite"/>
+          <include name="CR_Bulkentries"/>
           <include name="init"/>
+          <include name="DR_Bulkentries"/>
         </methods>
       </class> <!-- test.MoneylinkTest -->
-      <class name="test.ReportsTest">
+      <class name="test.SnapshotTest">
         <methods>
-          <include name="tearDownSuite"/>
-          <include name="setupSuite"/>
+          <include name="bulkaction"/>
+          <include name="delete_snapshot"/>
+          <include name="Bulk_Upload"/>
           <include name="init"/>
-          <include name="Export_Report"/>
+          <include name="Snapshot_quickentry"/>
+          <include name="TearDown"/>
+          <include name="SetUp"/>
+          <include name="Delete_SelectedSnapshot"/>
+          <include name="createSnapshot"/>
+          <include name="ExcelImport"/>
         </methods>
-      </class> <!-- test.ReportsTest -->
+      </class> <!-- test.SnapshotTest -->
     </classes>
-  </test> <!-- SanityTest(failed) -->
+  </test> <!-- EdgeTest(failed) -->
 </suite> <!-- Failed suite [Suite] -->

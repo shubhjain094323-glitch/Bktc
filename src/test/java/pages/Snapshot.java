@@ -5,11 +5,14 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import org.apache.logging.log4j.LogManager;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -21,7 +24,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import net.bytebuddy.asm.MemberSubstitution.FieldValue;
+import utils.RandomData;
+import utils.ReadConfigFile;
 
 public class Snapshot {
 
@@ -33,6 +37,7 @@ public class Snapshot {
 	Actions actions;
 	Robot robot;
 	RandomData random;
+	Logger logger;
 
 	public Snapshot(WebDriver driver) throws FileNotFoundException, AWTException {
 
@@ -47,6 +52,7 @@ public class Snapshot {
 		actions = new Actions(driver);
 		robot = new Robot();
 		random = new RandomData();
+		logger = LogManager.getLogger(this.getClass());
 	}
 
 	@FindBy(xpath = "//div[@class='quick-menu']//span[@class='icon-plus']")
@@ -201,6 +207,8 @@ public class Snapshot {
 
 	public void createSnapshot() throws InterruptedException, TimeoutException {
 
+		logger.info("Create New Snapshot (Manually) ");
+
 		wait.until(ExpectedConditions.visibilityOf(gotocreatesnapshot)).click();
 
 		date.sendKeys(config.getsnapshotdate());
@@ -248,35 +256,9 @@ public class Snapshot {
 			saveandmovetonext.click();
 		}
 		Savebutton.click();
+		Thread.sleep(1000);
 
-		// Check if duplicate PAN message exists
-
-		if (!duplicatePanMsgList.isEmpty() && duplicatePanMsgList.get(0).isDisplayed()) {
-			WebElement duplicatePanMsg = duplicatePanMsgList.get(0);
-
-			System.out.println("Duplicate PAN message shown: " + duplicatePanMsg.getText());
-
-			yesoptions.click();
-
-			System.out.println("Clicked on Yes");
-		} else {
-			System.out.println("No duplicate PAN message, skipping...");
-		}
-		Thread.sleep(2000);
-
-		if (!duplicatesnapshot.isEmpty() && duplicatesnapshot.get(0).isDisplayed()) {
-			System.out.println("Duplicate Snapshot message shown: " + duplicatesnapshot.get(0).getText());
-
-			yes_Options.click();
-
-			System.out.println("Clicked on Yes");
-		} else {
-			System.out.println("Duplicate Snapshot message not shown");
-		}
-
-		Thread.sleep(2000);
-
-		System.out.println("Snapshot created successfully");
+		logger.info("Snapshot created Successfully");
 
 	}
 
@@ -290,10 +272,14 @@ public class Snapshot {
 		deleteicon.click();
 		delete_yes.click();
 		Thread.sleep(2000);
+
+		logger.info("Snapshot Deleted Successfully");
 	}
 	// -------------------------------------------------------------------------------------------------------------
 
 	public void deleteselectedsnapshot() throws InterruptedException {
+
+		logger.info("Deletenig selected Snapshot");
 
 		// Open Snapshot
 		gotosnapshot.click();
@@ -333,9 +319,15 @@ public class Snapshot {
 		delete_yes.click();
 		Thread.sleep(1500);
 
+		logger.info("selected Snapshot Deleted Successfully");
+
 	}
 
+	// --------------------------------------------------------------------------------------------------
+
 	public void bulkuploadsnapshot() throws InterruptedException {
+
+		logger.info("Creating snapshot using bulk upload");
 
 		Thread.sleep(4000);
 		gotosnapshot.click();
@@ -344,13 +336,28 @@ public class Snapshot {
 		Thread.sleep(2000);
 
 		clickonBulkUpload.click();
-
-		wait.until(ExpectedConditions.visibilityOf(AddFilesfor_BulkUpload));
-		AddFilesfor_BulkUpload.click();
 		Thread.sleep(1500);
+		
+		// 1. Wait for the hidden input - it's the real upload element
+		WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(
+		    By.xpath("//div[@class='bulk-popup-brd']//input[@type='file']")
+		));
+
+		// 2. Unhide it with JS so sendKeys works in headless
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].style.display='block'; arguments[0].style.visibility='visible'; arguments[0].style.opacity='1'; arguments[0].style.width='10px'; arguments[0].style.height='10px'; arguments[0].style.clip='auto'; arguments[0].style.clipPath='none';", fileInput);
+
+		// 3. Send file path 
+		fileInput.sendKeys(config.getBulkuploadfilepath());
+		
+		Thread.sleep(1500);
+		
+		//	wait.until(ExpectedConditions.visibilityOf(AddFilesfor_BulkUpload));
+		//	AddFilesfor_BulkUpload.click();
 
 		// Upload file via Robot
-		robot.delay(1000);
+		
+/*		robot.delay(1000);
 		StringSelection selection = new StringSelection(config.getBulkuploadfilepath());
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
 		robot.keyPress(KeyEvent.VK_CONTROL);
@@ -359,7 +366,7 @@ public class Snapshot {
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-
+*/
 		wait.until(ExpectedConditions.elementToBeClickable(clickOnStartUpload));
 		clickOnStartUpload.click();
 
@@ -368,12 +375,17 @@ public class Snapshot {
 
 		wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
 
-		System.out.println("Bulk upload successfully uploaded");
+		logger.info("Snapshot Created successfully by bulk upload");
 
 	}
 
+	// ----------------------------------------------------------------------------------------------------------------
+
 	public void ExcelImport() throws InterruptedException {
-		Thread.sleep(3000);
+
+		logger.info("Creating snapshot using Excel Import");
+
+		Thread.sleep(4000);
 
 		gotosnapshot.click();
 
@@ -402,7 +414,9 @@ public class Snapshot {
 		String filePath = null;
 
 		// Check for Inventory Excel
+
 		List<WebElement> inventoryList = driver.findElements(By.xpath("//h2[normalize-space()='Excel Inventory']"));
+
 		if (!inventoryList.isEmpty() && inventoryList.get(0).isDisplayed()) {
 			System.out.println("Inventory Excel option found");
 			filePath = config.getInventoryExcelPath();
@@ -418,7 +432,7 @@ public class Snapshot {
 		}
 
 		// Upload the file using Robot
-		if (filePath != null) {
+/*		if (filePath != null) {
 			StringSelection selection = new StringSelection(filePath);
 			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
 
@@ -432,8 +446,32 @@ public class Snapshot {
 			robot.keyPress(KeyEvent.VK_ENTER);
 			robot.keyRelease(KeyEvent.VK_ENTER);
 
-			Thread.sleep(4000);
+			Thread.sleep(3000);
+*/
 
+		// Upload the file WITHOUT Robot - headless compatible
+		if (filePath!= null) {
+		    // File path MUST be absolute - e.g. C:\Users\...\file.xlsx
+		    File file = new File(filePath);
+		    String absolutePath = file.getAbsolutePath();
+		    System.out.println("Uploading file: " + absolutePath);
+
+		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		    // Your input from screenshot: id="file-upload"
+		    WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("file-upload")));
+
+		    // Unhide it because it has style="display: none;"
+		    JavascriptExecutor js = (JavascriptExecutor) driver;
+		    js.executeScript("arguments[0].style.display='block'; arguments[0].style.visibility='visible'; arguments[0].style.opacity='1'; arguments[0].style.height='1px'; arguments[0].style.width='1px';", fileInput);
+
+		    // This is the actual upload - no OS dialog needed
+		    fileInput.sendKeys(absolutePath);
+
+		    // Optional: wait for file name to appear / import button enabled
+		    Thread.sleep(1000);
+		}
+		
 			List<WebElement> ignoreList = driver.findElements(By.xpath(
 					"//div[@class='col-xl-12 col-lg-12 col-md-12 mt-0 mt-lg-0 mt-md-3 text-right d-flex align-items-center justify-content-end bottom-save-btn']//span[@class='icon-warning ie_icon_btn yellow-icon']"));
 
@@ -446,7 +484,7 @@ public class Snapshot {
 				System.out.println("Ignore message not found, skipping click.");
 			}
 
-			Thread.sleep(6000);
+			Thread.sleep(2000);
 
 			List<WebElement> yesBtns = driver.findElements(By.xpath("//button[normalize-space()='Yes']"));
 
@@ -464,6 +502,7 @@ public class Snapshot {
 
 			ClickonUpload_ExcelImport.click();
 
+			Thread.sleep(1500);
 			wait.until(ExpectedConditions.visibilityOf(ExcelImportSummary_Okaybutton));
 			Thread.sleep(2000);
 			ExcelImportSummary_Okaybutton.click();
@@ -472,14 +511,19 @@ public class Snapshot {
 			Finish_ExcelImport.click();
 
 			wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
-			System.out.println("Excel Import successfully uploaded");
+
+			logger.info("Created snapshot by Excel Import");
 
 		}
-	}
+	
 
-	public boolean snapshotquickentry() throws InterruptedException {
+	// ---------------------------------------------------------------------------------------------------------------
 
-		Thread.sleep(2000);
+	public String snapshotquickentry() throws InterruptedException {
+
+		logger.info("Quick Entry starting");
+
+		Thread.sleep(1500);
 		gotosnapshot.click();
 
 		contextmenu.click();
@@ -499,19 +543,10 @@ public class Snapshot {
 			Okaybutton.click();
 			Thread.sleep(1000);
 
-			List<WebElement> checkboxes = driver
-					.findElements(By.xpath("//label[contains(@for,'checkbox')]//div[contains(@class,'check')]"));
+			WebElement select_firstcheckbox = driver
+					.findElement(By.xpath("//label[@for='checkbox0']//div[contains(@class,'check')]"));
 
-			int count = Math.min(2, checkboxes.size());
-
-			if (count == 0) {
-				System.out.println("No snapshots available to select.");
-			} else {
-				for (int i = 0; i < count; i++) {
-					wait.until(ExpectedConditions.elementToBeClickable(checkboxes.get(i))).click();
-					System.out.println("Clicked snapshot checkbox: " + (i + 1));
-				}
-			}
+			select_firstcheckbox.click();
 
 			// Add entries
 			wait.until(ExpectedConditions.elementToBeClickable(AddEntries));
@@ -522,7 +557,7 @@ public class Snapshot {
 			wait.until(ExpectedConditions.elementToBeClickable(quickentrygstledgerSaveButton));
 			quickentrygstledgerSaveButton.click();
 
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			wait.until(ExpectedConditions.invisibilityOf(QuickentryLoader));
 
 			partygst.click();
@@ -540,23 +575,29 @@ public class Snapshot {
 			Thread.sleep(1000);
 			CreateEntries.click();
 
+			String actual_quickentry_status = getToastMessage();
+
+			System.out.println("Quick Entry Status is " + actual_quickentry_status);
+
 			wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
 
-			// System.out.println("Snapshot quick entries created successfully");
-			return true;
-		} catch (Exception e) {
+		//	driver.findElement(By.xpath("//button[normalize-space()='Back']")).click();
 
-			// System.out.println("Snapshot Quick Entry is not supported for this entity,
-			// please check entity setting");
-			return false;
+			return actual_quickentry_status;
+
+		} catch (Exception e) {
+			System.out.println("Snapshot Quick Entry is not supported for this entity, please check entity setting");
+			return "Quick Entry Not Supported";
 		}
 
 	}
 
-	public void bulkaction() throws InterruptedException {
+	// ------------------------------------------------------------------------------------------------------------------
+
+	public String bulkaction() throws InterruptedException {
 
 		Thread.sleep(4000);
-
+ 
 		gotosnapshot.click();
 
 		contextmenu.click();
@@ -574,51 +615,27 @@ public class Snapshot {
 
 		Thread.sleep(2000);
 
-		// Select first 2 snapshots
-		List<WebElement> checkboxes = driver
-				.findElements(By.xpath("//label[contains(@for,'checkbox')]//div[contains(@class,'check')]"));
+		WebElement draftcount = driver
+				.findElement(By.xpath("//div[contains(@class,'widgets_snapin px-2')]//div[2]//p[2]"));
+		String draftsnapshots = draftcount.getText();
+		System.out.println("Draft snapshot is " + draftsnapshots);
 
-		int count = Math.min(1, checkboxes.size());
+		int draftsnapshotcounts = Integer.parseInt(draftsnapshots.trim());
 
-		if (count == 0) {
-			System.out.println("No snapshots available to select.");
-			return;
+		if (draftsnapshotcounts <= 0) {
+
+			System.out.println("No Snapshot in Draft Widgets");
+			return "No snapshots";
 		}
 
-	//	JavascriptExecutor js = (JavascriptExecutor) driver;
+		if (draftsnapshotcounts > 0) {
 
-		for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 2; i++) {
 
-			checkboxes = driver
-					.findElements(By.xpath("//label[contains(@for,'checkbox')]//div[contains(@class,'check')]"));
-
-			WebElement checkbox = checkboxes.get(i);
-
-			js.executeScript("arguments[0].scrollIntoView({block:'center'});", checkbox);
-			Thread.sleep(500);
-
-			js.executeScript("arguments[0].click();", checkbox);
-
-			System.out.println("Clicked snapshot checkbox : " + (i + 1));
-
-			Thread.sleep(1000);
-		}
-
-		// Check if any popup appeared before clicking Delete
-		List<WebElement> popup = driver
-				.findElements(By.xpath("//div[contains(@class,'modal') and contains(@class,'show')]"));
-
-		if (!popup.isEmpty()) {
-
-			System.out.println("Popup detected : " + popup.get(0).getText());
-
-			List<WebElement> popupButtons = driver
-					.findElements(By.xpath("//div[contains(@class,'modal') and contains(@class,'show')]//button"));
-
-			if (!popupButtons.isEmpty()) {
-				js.executeScript("arguments[0].click();", popupButtons.get(0));
-				Thread.sleep(1000);
+				driver.findElement(By.xpath("//label[@for='checkbox" + i + "']//div[contains(@class,'check')]"))
+						.click();
 			}
+
 		}
 
 		// Click Delete
@@ -635,124 +652,19 @@ public class Snapshot {
 
 		Thread.sleep(2000);
 
-		// Handle Information popup if present
-//		List<WebElement> infoPopup = driver.findElements(By.xpath("//button[normalize-space()='Okay']"));
-//
-//		if (!infoPopup.isEmpty()) {
-//
-//			wait.until(ExpectedConditions.elementToBeClickable(infoPopup.get(0)));
-//
-//			js.executeScript("arguments[0].click();", infoPopup.get(0));
-		
+		String actual = driver.findElement(By.xpath("//div[contains(@class,'modal-body')]//p[1]")).getText();
+
+		System.out.println("Bulk action status is " + actual);
+
+		Thread.sleep(2000);
+
 		Okaybutton.click();
-		
 
-			System.out.println("Clicked Okay button");
-		
+		return actual;
 
-		System.out.println("Bulk snapshot delete flow completed.");
 	}
 
-	/*
-	 * public void bulkaction() throws InterruptedException {
-	 * 
-	 * Thread.sleep(4000);
-	 * 
-	 * gotosnapshot.click();
-	 * 
-	 * contextmenu.click();
-	 * 
-	 * ClickOnBulkAction.click();
-	 * 
-	 * selectTimePeriod.click();
-	 * 
-	 * SinceBeginning.click(); Thread.sleep(1000);
-	 * 
-	 * wait.until(ExpectedConditions.elementToBeClickable(ClickOnDraft));
-	 * ClickOnDraft.click(); Thread.sleep(1000);
-	 * 
-	 * // for (int i = 0; i <= 2; i++) { // WebElement checkbox =
-	 * wait.until(ExpectedConditions.elementToBeClickable( //
-	 * By.xpath("//label[contains(@for,'checkbox" + i +
-	 * "')]//div[contains(@class,'check')]"))); // checkbox.click(); //
-	 * System.out.println("Clicked checkbox" + i); // }
-	 * 
-	 * // List<WebElement> checkboxes = driver // .findElements(By.xpath(
-	 * "//label[contains(@for,'checkbox')]//div[contains(@class,'check')]")); // //
-	 * int count = Math.min(2, checkboxes.size()); // // if (count == 0) { //
-	 * System.out.println("No snapshots available to select."); // } else { // for
-	 * (int i = 0; i < count; i++) { //
-	 * wait.until(ExpectedConditions.elementToBeClickable(checkboxes.get(i))).click(
-	 * ); // System.out.println("Clicked snapshot checkbox: " + (i + 1)); // } // }
-	 * 
-	 * // for (int i = 0; i < 2; i++) { // // List<WebElement> checkboxes =
-	 * driver.findElements( //
-	 * By.xpath("//label[contains(@for,'checkbox')]//div[contains(@class,'check')]")
-	 * // ); // // if (checkboxes.isEmpty()) { // //
-	 * System.out.println("No snapshots available to select."); // break; // } // //
-	 * // Select last snapshot // WebElement checkbox =
-	 * checkboxes.get(checkboxes.size() - 1); // //
-	 * wait.until(ExpectedConditions.elementToBeClickable(checkbox)).click(); // //
-	 * System.out.println("Clicked snapshot checkbox: " + (i + 1));
-	 * 
-	 * List<WebElement> checkboxes = driver.findElements(
-	 * By.xpath("//label[contains(@for,'checkbox')]//div[contains(@class,'check')]")
-	 * );
-	 * 
-	 * int snapshotsToSelect = Math.min(2, checkboxes.size());
-	 * 
-	 * for (int i = 0; i < snapshotsToSelect; i++) {
-	 * 
-	 * WebElement checkbox = checkboxes.get(i);
-	 * 
-	 * ((JavascriptExecutor) driver).executeScript(
-	 * "arguments[0].scrollIntoView({block:'center'});", checkbox);
-	 * 
-	 * Thread.sleep(1000);
-	 * 
-	 * wait.until(ExpectedConditions.elementToBeClickable(checkbox)) .click();
-	 * 
-	 * System.out.println("Clicked snapshot checkbox: " + (i + 1)); }
-	 * 
-	 * // Delete button click
-	 * driver.findElement(By.xpath("//button[normalize-space()='Delete']")).click();
-	 * 
-	 * // Confirmation popup if applicable //
-	 * driver.findElement(By.xpath("//button[text()='Yes']")).click();
-	 * 
-	 * Thread.sleep(2000);
-	 * 
-	 * 
-	 * // Click Delete button
-	 * wait.until(ExpectedConditions.elementToBeClickable(ClickOnDelete));
-	 * ClickOnDelete.click();
-	 * 
-	 * 
-	 * // Confirm Yes
-	 * 
-	 * wait.until(ExpectedConditions.elementToBeClickable(yes_Options));
-	 * yes_Options.click();
-	 * 
-	 * // Information pop up - some snapshot are not deleted as they are linked
-	 * 
-	 * List<WebElement> infopopup = driver .findElements(By.xpath(
-	 * "//div[@class='center_apply_btn_new']//button[normalize-space()='Okay']"));
-	 * 
-	 * ////div[contains(@class,'modal-content')]//p[text()='Successful']
-	 * 
-	 * if (!infopopup.isEmpty()) { WebElement yes =
-	 * wait.until(ExpectedConditions.elementToBeClickable(infopopup.get(0)));
-	 * js.executeScript("arguments[0].click();", yes);
-	 * System.out.println("Clicked on Ok button of Information popup."); } else {
-	 * System.out.println("Ok button not found, skipping click."); }
-	 * 
-	 * // Wait for success dialog and click OK WebElement okBtn =
-	 * wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-	 * "//button[text()='Okay']"))); Thread.sleep(1500); okBtn.click();
-	 * System.out.println("Bulk snapshot deleted successfully");
-	 * 
-	 * }
-	 */
+	// ------------------------------------------------------------------------------------------------------------------
 
 	public void ExportList() throws InterruptedException {
 
@@ -774,6 +686,8 @@ public class Snapshot {
 		System.out.println("Export list downloaded successfully");
 
 	}
+
+	// --------------------------------------------------------------------------------------------------------------
 
 	public void Create_reimbursement_Snapshot() throws InterruptedException {
 
@@ -858,6 +772,8 @@ public class Snapshot {
 
 	}
 
+	// ------------------------------------------------------------------------------------------------------------------
+
 	public String getToastMessage() {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		return wait
@@ -865,6 +781,8 @@ public class Snapshot {
 						.visibilityOfElementLocated(By.xpath("//div[contains(@class,'Toastify__toast-body')]")))
 				.getText();
 	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
 
 	public String getBulkUploadStatus() {
 

@@ -1,41 +1,58 @@
 package pages;
 
 import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import utils.RandomData;
+import utils.ReadConfigFile;
 
 public class BankingPage {
 
 	WebDriver driver;
-	ReadConfigFile config;
-	Robot robot;
-	Actions actions;
-	RandomData rd;
+	JavascriptExecutor js;
 	WebDriverWait wait;
 
-	public BankingPage(WebDriver driver) {
+	ReadConfigFile config;
+	Actions actions;
+	Robot robot;
+	RandomData rd;
+	Logger logger;
+
+	public BankingPage(WebDriver driver) throws Exception {
+
+		System.out.println("========== BankingPage Constructor ==========");
+		System.out.println("Driver received: " + driver);
+
+		if (driver == null) {
+			throw new IllegalArgumentException("BankingPage received NULL driver");
+		}
+
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		try {
-			config = new ReadConfigFile();
-			robot = new Robot();
-			actions = new Actions(driver);
-			rd = new RandomData();
-			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		js = (JavascriptExecutor) driver;
+		wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+		config = new ReadConfigFile();
+		actions = new Actions(driver);
+		robot = new Robot();
+		rd = new RandomData();
+		logger = LogManager.getLogger(this.getClass());
+
+		System.out.println("BankingPage initialized successfully");
 
 	}
 
@@ -69,7 +86,9 @@ public class BankingPage {
 	@FindBy(xpath = "//button[normalize-space()='Yes']")
 	WebElement confirmation_Yes;
 
-	@FindBy(xpath = "(//span[@class='icon-edit cicon editbc_bankin'])[last()]") // span[@class='icon-edit p-1']  //(//span[@class='icon-edit cicon editbc_bankin'])[last()]
+	@FindBy(xpath = "(//span[@class='icon-edit cicon editbc_bankin'])[last()]") // span[@class='icon-edit p-1']
+																				// //(//span[@class='icon-edit cicon
+																				// editbc_bankin'])[last()]
 	WebElement bankediticon;
 
 	@FindBy(xpath = "//button[normalize-space()='Delete']")
@@ -80,119 +99,72 @@ public class BankingPage {
 
 	public void gotobaningmodule() {
 
-		bankingmodule.click();
+		try {
+			bankingmodule.click();
+		} catch (Exception e) {
+			logger.error("Unable to click the banking module", e);
+			logger.debug("Debug log........");
+		}
 		refreshbutton.click();
 	}
 
-	public void addbank() {
+	public void addbank() throws InterruptedException {
 
+		logger.info("Clicking for Add Bank");
 		addbank.click();
+		logger.info("Entering the Financial Institute Details");
 		bankdropdown.click();
+		Thread.sleep(1000);
 		selectbank.sendKeys(config.getProperty("addbank"));
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
+		Thread.sleep(1000);
 
-			e.printStackTrace();
-		}
 		actions.sendKeys(Keys.ENTER).perform();
 		banktype.sendKeys(config.getProperty("selectbanktype"));
 
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Thread.sleep(1000);
+
 		actions.sendKeys(Keys.ENTER).perform();
 		bankaccountname.sendKeys(rd.getAccountname());
 
 		bankaccountnumber.sendKeys(rd.getAccountnum());
+
+		logger.info("Clicking on the Save Button for adding bank");
 		savebutton.click();
 		confirmation_Yes.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		logger.info("Finanancial Insitute Added");
+		Thread.sleep(1000);
+
 	}
 
-	public void deletebank() {
+	public void deletebank() throws InterruptedException {
 
-		try {
-			Thread.sleep(3500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-//		robot.keyPress(KeyEvent.VK_SHIFT);
-//		robot.keyPress(KeyEvent.VK_TAB);
-//
-//		robot.keyRelease(KeyEvent.VK_SHIFT);
-//		robot.keyRelease(KeyEvent.VK_TAB);
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//
-//		actions.sendKeys(Keys.ENTER).perform();
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+		Thread.sleep(3500);
 
 		bankediticon.click();
 		wait.until(ExpectedConditions.visibilityOf(bankdeletebutton));
 		bankdeletebutton.click();
 		wait.until(ExpectedConditions.visibilityOf(delete_yes));
 		delete_yes.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		logger.info("Financial Institute Deleted");
+		Thread.sleep(2500);
 
 	}
 
-	public void update_Bank() {
+	public void update_Bank() throws InterruptedException {
 
-		try {
-			Thread.sleep(3500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-//		robot.keyPress(KeyEvent.VK_SHIFT);
-//		robot.keyPress(KeyEvent.VK_TAB);
-//
-//		robot.keyRelease(KeyEvent.VK_SHIFT);
-//		robot.keyRelease(KeyEvent.VK_TAB);
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//
-//		actions.sendKeys(Keys.ENTER).perform();
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+		Thread.sleep(3000);
 
-		bankediticon.click();
+		wait.until(ExpectedConditions.elementToBeClickable(bankediticon)).click();
+
+		Thread.sleep(1500);
 		bankaccountname.sendKeys(rd.getAccountname());
 		savebutton.click();
 		confirmation_Yes.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
+		logger.info("Financial Institute Updated");
+		Thread.sleep(2000);
 	}
 
 	public String getToastmessage() {

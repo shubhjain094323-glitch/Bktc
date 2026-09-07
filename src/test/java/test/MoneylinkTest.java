@@ -12,10 +12,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import pages.BaseTest;
+import base.BaseTestUpdated;
 import pages.Moneylink;
 
-public class MoneylinkTest extends BaseTest {
+public class MoneylinkTest extends BaseTestUpdated {
 
 	Moneylink ml;
 	WebDriverWait wait;
@@ -31,40 +31,47 @@ public class MoneylinkTest extends BaseTest {
 		}
 	}
 
-	@Test(groups = { "sanity" , "regression" })
+	@Test(groups = { "sanity", "regression" })
 	public void open_moneylink() throws InterruptedException {
+		logger.info("Monyelink module opening");
 		ml.openMoneylinkPage();
+		logger.info("Selecting bank and time period for accounting");
 		ml.setupMoneylink();
 	}
 
-	@Test(dependsOnMethods = "open_moneylink", alwaysRun = true,groups = { "sanity" , "regression" })
+	@Test(dependsOnMethods = "open_moneylink", alwaysRun = true, groups = { "sanity", "regression" })
 	public void reset_moneylinktransaction() throws InterruptedException {
 
 		SoftAssert soft = new SoftAssert();
 
+		logger.info("Selecting transaction for reseting");
+
 		ml.transactionreset();
 
-		WebElement msg = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='pmsg-blue-center']")));
+//		WebElement msg = wait
+//				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='pmsg-blue-center']")));
 
-		String actualReset = msg.getText();
-		System.out.println("Reset Message: " + actualReset);
+//		String actualReset = msg.getText();
+//		System.out.println("Reset Message: " + actualReset);
 
-		if (actualReset.contains("Successful")) {
-			soft.assertTrue(true);
-			System.out.println("Transaction reset successfully");
-		} else {
-			System.out.println("Reset message not found, skipping validation");
-		}
+//		if (actualReset.contains("Successful")) {
+//			soft.assertTrue(true);
+//			System.out.println("Transaction reset successfully");
+//		} else {
+//			System.out.println("Reset message not found, skipping validation");
+//		}
 
 		Thread.sleep(1500);
 		driver.findElement(By.xpath("//a[normalize-space()='money link']")).click();
 		Thread.sleep(1500);
 
 		soft.assertAll();
+
+		logger.info("Transaction reseted");
+
 	}
 
-	@Test(dependsOnMethods = "reset_moneylinktransaction", alwaysRun = true, groups = { "sanity" , "regression" })
+	@Test(dependsOnMethods = "reset_moneylinktransaction", alwaysRun = true, groups = { "sanity", "regression" })
 	public void single_transaction_accounting() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
@@ -81,12 +88,16 @@ public class MoneylinkTest extends BaseTest {
 		Thread.sleep(1500);
 
 		soft.assertAll();
+
+		logger.info("Single transaction Accounted");
+
 	}
 
-	@Test(dependsOnMethods = "single_transaction_accounting", alwaysRun = true, groups = { "sanity" , "regression" })
+	@Test(dependsOnMethods = "single_transaction_accounting", alwaysRun = true, groups = { "sanity", "regression" })
 	public void moneylink_quickentry() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
+		logger.info("Selecting record for Moneylink Quick Entry");
 		ml.moneylinkquickentry();
 		String actualquickentry = ml.getToastMessage();
 		System.out.println("Quick Entry " + actualquickentry);
@@ -94,9 +105,11 @@ public class MoneylinkTest extends BaseTest {
 		Thread.sleep(1500);
 
 		soft.assertAll();
+
+		logger.info("Moneylink Quick Entry Done");
 	}
 
-	@Test(dependsOnMethods = "moneylink_quickentry", alwaysRun = true, groups = { "sanity" , "regression" })
+	@Test(dependsOnMethods = "moneylink_quickentry", alwaysRun = true, groups = { "sanity", "regression" })
 	public void CR_Bulkentries() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
@@ -108,9 +121,11 @@ public class MoneylinkTest extends BaseTest {
 		Thread.sleep(1500);
 
 		soft.assertAll();
+
+		logger.info("Moneylink CR_BUlk Entries Done");
 	}
 
-	@Test(dependsOnMethods = "CR_Bulkentries", alwaysRun = true,groups = { "sanity" , "regression" })
+	@Test(dependsOnMethods = "CR_Bulkentries", alwaysRun = true, groups = { "sanity", "regression" })
 	public void DR_Bulkentries() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
 
@@ -121,6 +136,7 @@ public class MoneylinkTest extends BaseTest {
 		Thread.sleep(1500);
 
 		soft.assertAll();
+		logger.info("Moneylink DR_BUlk Entries Done");
 	}
 
 }

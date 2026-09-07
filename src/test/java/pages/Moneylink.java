@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -19,6 +21,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utils.ReadConfigFile;
+
 public class Moneylink {
 
 	WebDriver driver;
@@ -27,6 +31,7 @@ public class Moneylink {
 	ReadConfigFile config;
 	Actions actions;
 	Robot robot;
+	Logger logger;
 
 	// Constructor
 	public Moneylink(WebDriver driver) throws FileNotFoundException, AWTException {
@@ -37,6 +42,8 @@ public class Moneylink {
 		config = new ReadConfigFile();
 		actions = new Actions(driver);
 		robot = new Robot();
+		logger = LogManager.getLogger(this.getClass());
+		
 
 	}
 
@@ -124,18 +131,24 @@ public class Moneylink {
 	@FindBy(xpath = "//span[@class='shortcut_keys_action' and text()='X']")
 	WebElement ClickOnMoneylink_ExportList;
 
+	@FindBy(xpath = "//div[contains(@class,'Toastify__toast-body')]")
+	WebElement toastmsg;
+
 	public void openMoneylinkPage() throws InterruptedException {
+		logger.info("Redirecting to MoneyLink Module");
 
 		wait.until(ExpectedConditions.elementToBeClickable(gotoMoneylink));
 		gotoMoneylink.click();
 		Thread.sleep(1000);
-		System.out.println("Opened Moneylink page");
+		logger.info("Opened MoneyLink Module");
 	}
 
 	// Common method to open Moneylink, select bank, and choose "Since Beginning"
 	public void setupMoneylink() throws InterruptedException {
 
 		Thread.sleep(2000);
+		
+		logger.info("Setup moneylink - Bank and Time period selection ");
 
 		contextMenu.click();
 
@@ -208,14 +221,31 @@ public class Moneylink {
 		SelectLedger.click();
 		actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
 
-		Thread.sleep(2000);
+		// Thread.sleep(4000);
+
+		String toast = getToastMessage();
+
+		System.out.println("Toast msg " + toast);
+
+		wait.until(ExpectedConditions.invisibilityOf(toastmsg));
 
 		wait.until(ExpectedConditions.elementToBeClickable(SaveTransaction));
 		SaveTransaction.click();
-		Thread.sleep(1500);
+
+		String toast1 = getToastMessage();
+
+		System.out.println("After save Toast msg " + toast1);
+
+		// Thread.sleep(1500);
+		if (toast1.equalsIgnoreCase("Transaction saved")) {
+			System.out.println("Transaction saved successfully");
+			return;
+		}
+
+		System.out.println("Transaction was not saved. Checking Billwise popup...");
 
 		// Use a very short explicit wait just to check presence
-		WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(2));
+		WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
 		try {
 			// Try locating the popup within 2 seconds
@@ -258,7 +288,7 @@ public class Moneylink {
 			System.out.println("Billwise amount popup not found, skipping allocation steps.");
 		}
 
-		System.out.println("Transaction saved successfully");
+		// System.out.println("Transaction saved successfully");
 
 	}
 
@@ -281,7 +311,7 @@ public class Moneylink {
 
 		ClickOnRefreshRecommendation.click();
 		Thread.sleep(1500);
-		
+
 		wait.until(ExpectedConditions.elementToBeClickable(ClickOnYes)).click();
 
 		ClickonSelectVoucherType.click();
@@ -302,7 +332,7 @@ public class Moneylink {
 		ClickOnYes.click();
 		Thread.sleep(3000);
 
-		System.out.println("Bulk CR entries done");
+		logger.info("CR bulk entries Done");
 
 	}
 
@@ -323,7 +353,7 @@ public class Moneylink {
 
 		ClickOnRefreshRecommendation.click();
 		Thread.sleep(1500);
-		
+
 		wait.until(ExpectedConditions.elementToBeClickable(ClickOnYes)).click();
 
 		ClickonSelectVoucherType.click();
@@ -346,7 +376,8 @@ public class Moneylink {
 		driver.findElement(By.xpath("//button[normalize-space()='Yes']")).click();
 		Thread.sleep(3000);
 
-		System.out.println("DR Bulk entries done");
+		logger.info("DR bulk entries Done");
+
 	}
 
 	public void moneylinkquickentry() throws InterruptedException {
@@ -377,7 +408,7 @@ public class Moneylink {
 		driver.findElement(By.xpath("//button[normalize-space()='Create Entries']")).click();
 		Thread.sleep(3000);
 
-		System.out.println("Moneylink Quick Entry Successfully Saved");
+		logger.info("MoneyLink QuickEntry Done");
 
 	}
 
@@ -411,7 +442,7 @@ public class Moneylink {
 		Thread.sleep(15000);
 
 		// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
-		
+
 		WebElement msg = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='pmsg-blue-center']")));
 
@@ -429,7 +460,7 @@ public class Moneylink {
 
 		// ClickOnOkay.click();
 
-		System.out.println("Transaction reseted successfully");
+		logger.info("Transaction reseted");
 
 	}
 
@@ -442,7 +473,8 @@ public class Moneylink {
 		ClickOnMoneylink_ExportList.click();
 		Thread.sleep(1500);
 
-		System.out.println("Export successfully done");
+		logger.info("Export Successfully");
+
 
 	}
 
@@ -450,8 +482,7 @@ public class Moneylink {
 
 		try {
 
-			WebElement toast = wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("//div[contains(@class,'Toastify__toast-body')]")));
+			WebElement toast = wait.until(ExpectedConditions.visibilityOf(toastmsg));
 
 			return toast.getText().trim();
 

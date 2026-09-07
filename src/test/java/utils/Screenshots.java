@@ -10,7 +10,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public class Screenshots {
+import base.BaseTestUpdated;
+
+public class Screenshots{
+
+
 
 	public static String captureScreenshot(WebDriver driver, String testName) {
 		

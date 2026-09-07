@@ -4,11 +4,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-
-import pages.BaseTest;
+import base.BaseTestUpdated;
 import pages.Reports;
 
-public class ReportsTest extends BaseTest {
+public class ReportsTest extends BaseTestUpdated {
 
 	Reports rp;
 	SoftAssert soft;

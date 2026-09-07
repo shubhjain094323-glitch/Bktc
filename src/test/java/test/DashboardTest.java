@@ -9,20 +9,21 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import pages.BaseTest;
-import pages.Dashboard;
+import base.BaseTestUpdated;
+import base.DriverFactory;
+import pages.DashboardPage;
 
-public class DashboardTest extends BaseTest {
+public class DashboardTest extends BaseTestUpdated {
 
-	Dashboard db;
+	DashboardPage db;
 	WebDriverWait wait;
 
 	@BeforeClass(alwaysRun = true)
 	public void init() throws FileNotFoundException, AWTException {
-
-		System.out.println("Driver in BeforeClass: " + driver);
-		db = new Dashboard(driver);
-		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		
+		db = new DashboardPage(driver);
+		
+		wait = new WebDriverWait(DriverFactory.getDriver(), Duration.ofSeconds(20));
 
 	}
 
