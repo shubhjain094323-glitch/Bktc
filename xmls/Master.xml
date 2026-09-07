@@ -11,7 +11,7 @@
 
 	<parameter name="os" value="windows"></parameter>
 	<parameter name="browser" value="auto"></parameter>
-	<parameter name="headless" value="false" />
+	<parameter name="headless" value="true" />
 
 	<test thread-count="5" name="ChromeTest">
 
