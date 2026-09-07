@@ -1944,3 +1944,23 @@ Session ID: b47793e5-b653-4646-86ee-e8f927801d50
 10:46:47.993 [main] INFO  pages.Snapshot.createSnapshot(Snapshot.java:210)oggger - Create New Snapshot (Manually) 
 10:51:03.454 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
 10:51:05.480 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+16:13:07.591 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+16:13:09.604 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+16:13:15.650 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+16:13:20.289 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+16:13:22.961 [main] INFO  pages.Snapshot.snapshotquickentry(Snapshot.java:524)oggger - Quick Entry starting
+16:19:49.751 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+16:19:51.764 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+16:19:57.645 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+16:20:02.530 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+16:20:05.356 [main] INFO  pages.Snapshot.snapshotquickentry(Snapshot.java:523)oggger - Quick Entry starting
+16:31:21.757 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+16:31:23.764 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+16:31:28.736 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+16:31:32.013 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+16:31:34.573 [main] INFO  pages.Snapshot.snapshotquickentry(Snapshot.java:523)oggger - Quick Entry starting
+16:36:18.607 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+16:36:20.623 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+16:36:25.651 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+16:36:29.297 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+16:36:31.944 [main] INFO  pages.Snapshot.snapshotquickentry(Snapshot.java:523)oggger - Quick Entry starting

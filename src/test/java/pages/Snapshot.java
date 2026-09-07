@@ -337,36 +337,35 @@ public class Snapshot {
 
 		clickonBulkUpload.click();
 		Thread.sleep(1500);
-		
+
 		// 1. Wait for the hidden input - it's the real upload element
-		WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(
-		    By.xpath("//div[@class='bulk-popup-brd']//input[@type='file']")
-		));
+		WebElement fileInput = wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.xpath("//div[@class='bulk-popup-brd']//input[@type='file']")));
 
 		// 2. Unhide it with JS so sendKeys works in headless
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].style.display='block'; arguments[0].style.visibility='visible'; arguments[0].style.opacity='1'; arguments[0].style.width='10px'; arguments[0].style.height='10px'; arguments[0].style.clip='auto'; arguments[0].style.clipPath='none';", fileInput);
+		js.executeScript(
+				"arguments[0].style.display='block'; arguments[0].style.visibility='visible'; arguments[0].style.opacity='1'; arguments[0].style.width='10px'; arguments[0].style.height='10px'; arguments[0].style.clip='auto'; arguments[0].style.clipPath='none';",
+				fileInput);
 
-		// 3. Send file path 
+		// 3. Send file path
 		fileInput.sendKeys(config.getBulkuploadfilepath());
-		
+
 		Thread.sleep(1500);
-		
-		//	wait.until(ExpectedConditions.visibilityOf(AddFilesfor_BulkUpload));
-		//	AddFilesfor_BulkUpload.click();
+
+		// wait.until(ExpectedConditions.visibilityOf(AddFilesfor_BulkUpload));
+		// AddFilesfor_BulkUpload.click();
 
 		// Upload file via Robot
-		
-/*		robot.delay(1000);
-		StringSelection selection = new StringSelection(config.getBulkuploadfilepath());
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-*/
+
+		/*
+		 * robot.delay(1000); StringSelection selection = new
+		 * StringSelection(config.getBulkuploadfilepath());
+		 * Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,
+		 * null); robot.keyPress(KeyEvent.VK_CONTROL); robot.keyPress(KeyEvent.VK_V);
+		 * robot.keyRelease(KeyEvent.VK_V); robot.keyRelease(KeyEvent.VK_CONTROL);
+		 * robot.keyPress(KeyEvent.VK_ENTER); robot.keyRelease(KeyEvent.VK_ENTER);
+		 */
 		wait.until(ExpectedConditions.elementToBeClickable(clickOnStartUpload));
 		clickOnStartUpload.click();
 
@@ -432,90 +431,90 @@ public class Snapshot {
 		}
 
 		// Upload the file using Robot
-/*		if (filePath != null) {
-			StringSelection selection = new StringSelection(filePath);
-			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-
-			// Press CTRL + V
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-
-			// Press Enter
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-
-			Thread.sleep(3000);
-*/
+		/*
+		 * if (filePath != null) { StringSelection selection = new
+		 * StringSelection(filePath);
+		 * Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,
+		 * null);
+		 * 
+		 * // Press CTRL + V robot.keyPress(KeyEvent.VK_CONTROL);
+		 * robot.keyPress(KeyEvent.VK_V); robot.keyRelease(KeyEvent.VK_V);
+		 * robot.keyRelease(KeyEvent.VK_CONTROL);
+		 * 
+		 * // Press Enter robot.keyPress(KeyEvent.VK_ENTER);
+		 * robot.keyRelease(KeyEvent.VK_ENTER);
+		 * 
+		 * Thread.sleep(3000);
+		 */
 
 		// Upload the file WITHOUT Robot - headless compatible
-		if (filePath!= null) {
-		    // File path MUST be absolute - e.g. C:\Users\...\file.xlsx
-		    File file = new File(filePath);
-		    String absolutePath = file.getAbsolutePath();
-		    System.out.println("Uploading file: " + absolutePath);
+		if (filePath != null) {
+			// File path MUST be absolute - e.g. C:\Users\...\file.xlsx
+			File file = new File(filePath);
+			String absolutePath = file.getAbsolutePath();
+			System.out.println("Uploading file: " + absolutePath);
 
-		    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		    // Your input from screenshot: id="file-upload"
-		    WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("file-upload")));
+			// Your input from screenshot: id="file-upload"
+			WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("file-upload")));
 
-		    // Unhide it because it has style="display: none;"
-		    JavascriptExecutor js = (JavascriptExecutor) driver;
-		    js.executeScript("arguments[0].style.display='block'; arguments[0].style.visibility='visible'; arguments[0].style.opacity='1'; arguments[0].style.height='1px'; arguments[0].style.width='1px';", fileInput);
+			// Unhide it because it has style="display: none;"
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(
+					"arguments[0].style.display='block'; arguments[0].style.visibility='visible'; arguments[0].style.opacity='1'; arguments[0].style.height='1px'; arguments[0].style.width='1px';",
+					fileInput);
 
-		    // This is the actual upload - no OS dialog needed
-		    fileInput.sendKeys(absolutePath);
+			// This is the actual upload - no OS dialog needed
+			fileInput.sendKeys(absolutePath);
 
-		    // Optional: wait for file name to appear / import button enabled
-		    Thread.sleep(1000);
-		}
-		
-			List<WebElement> ignoreList = driver.findElements(By.xpath(
-					"//div[@class='col-xl-12 col-lg-12 col-md-12 mt-0 mt-lg-0 mt-md-3 text-right d-flex align-items-center justify-content-end bottom-save-btn']//span[@class='icon-warning ie_icon_btn yellow-icon']"));
-
-			if (!ignoreList.isEmpty()) {
-				WebElement ignoremsg = wait.until(ExpectedConditions.elementToBeClickable(ignoreList.get(0)));
-				Thread.sleep(1500);
-				js.executeScript("arguments[0].click();", ignoremsg);
-				System.out.println("Ignore message clicked.");
-			} else {
-				System.out.println("Ignore message not found, skipping click.");
-			}
-
-			Thread.sleep(2000);
-
-			List<WebElement> yesBtns = driver.findElements(By.xpath("//button[normalize-space()='Yes']"));
-
-			if (!yesBtns.isEmpty()) {
-				WebElement yes = wait
-						.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Yes']")));
-				Thread.sleep(1000);
-				actions.moveToElement(yes).click().perform();
-				System.out.println("Clicked for ignore Yes button.");
-			} else {
-				System.out.println("Ignore - Yes button not found,");
-			}
-
+			// Optional: wait for file name to appear / import button enabled
 			Thread.sleep(1000);
-
-			ClickonUpload_ExcelImport.click();
-
-			Thread.sleep(1500);
-			wait.until(ExpectedConditions.visibilityOf(ExcelImportSummary_Okaybutton));
-			Thread.sleep(2000);
-			ExcelImportSummary_Okaybutton.click();
-
-			wait.until(ExpectedConditions.visibilityOf(Finish_ExcelImport));
-			Finish_ExcelImport.click();
-
-			wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
-
-			logger.info("Created snapshot by Excel Import");
-
 		}
-	
+
+		List<WebElement> ignoreList = driver.findElements(By.xpath(
+				"//div[@class='col-xl-12 col-lg-12 col-md-12 mt-0 mt-lg-0 mt-md-3 text-right d-flex align-items-center justify-content-end bottom-save-btn']//span[@class='icon-warning ie_icon_btn yellow-icon']"));
+
+		if (!ignoreList.isEmpty()) {
+			WebElement ignoremsg = wait.until(ExpectedConditions.elementToBeClickable(ignoreList.get(0)));
+			Thread.sleep(1500);
+			js.executeScript("arguments[0].click();", ignoremsg);
+			System.out.println("Ignore message clicked.");
+		} else {
+			System.out.println("Ignore message not found, skipping click.");
+		}
+
+		Thread.sleep(2000);
+
+		List<WebElement> yesBtns = driver.findElements(By.xpath("//button[normalize-space()='Yes']"));
+
+		if (!yesBtns.isEmpty()) {
+			WebElement yes = wait
+					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Yes']")));
+			Thread.sleep(1000);
+			actions.moveToElement(yes).click().perform();
+			System.out.println("Clicked for ignore Yes button.");
+		} else {
+			System.out.println("Ignore - Yes button not found,");
+		}
+
+		Thread.sleep(1000);
+
+		ClickonUpload_ExcelImport.click();
+
+		Thread.sleep(1500);
+		wait.until(ExpectedConditions.visibilityOf(ExcelImportSummary_Okaybutton));
+		Thread.sleep(2000);
+		ExcelImportSummary_Okaybutton.click();
+
+		wait.until(ExpectedConditions.visibilityOf(Finish_ExcelImport));
+		Finish_ExcelImport.click();
+
+		wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
+
+		logger.info("Created snapshot by Excel Import");
+
+	}
 
 	// ---------------------------------------------------------------------------------------------------------------
 
@@ -542,6 +541,21 @@ public class Snapshot {
 
 			Okaybutton.click();
 			Thread.sleep(1000);
+
+			WebElement pending = driver.findElement(By.xpath(
+					"//div[contains(@class,'widget-block-new pending_usrin  active-widget')]//div[@class='wcounter-new ellipsisc']"));
+			String pendingsnapshots = pending.getText();
+			System.out.println("Snapshot available for the QuickEntry  is " + pendingsnapshots);
+			
+			 // Convert String to Integer
+	        int pendingCount = Integer.parseInt(pendingsnapshots);
+			
+	        if (pendingCount <= 0) {
+
+	            System.out.println("No snapshot found for QuickEntry");
+	            return "No Snapshot Found for QuickEntry";
+
+	        } else {
 
 			WebElement select_firstcheckbox = driver
 					.findElement(By.xpath("//label[@for='checkbox0']//div[contains(@class,'check')]"));
@@ -581,11 +595,12 @@ public class Snapshot {
 
 			wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
 
-		//	driver.findElement(By.xpath("//button[normalize-space()='Back']")).click();
+			// driver.findElement(By.xpath("//button[normalize-space()='Back']")).click();
 
 			return actual_quickentry_status;
 
-		} catch (Exception e) {
+	        }
+	        } catch (Exception e) {
 			System.out.println("Snapshot Quick Entry is not supported for this entity, please check entity setting");
 			return "Quick Entry Not Supported";
 		}
@@ -597,7 +612,7 @@ public class Snapshot {
 	public String bulkaction() throws InterruptedException {
 
 		Thread.sleep(4000);
- 
+
 		gotosnapshot.click();
 
 		contextmenu.click();

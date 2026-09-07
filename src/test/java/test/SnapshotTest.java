@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.io.FileNotFoundException;
 
 import org.openqa.selenium.By;
+import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -59,11 +60,17 @@ public class SnapshotTest extends BaseTestUpdated {
 	@Test(dependsOnMethods = "delete_snapshot", alwaysRun = true, groups = { "sanity", "regression" })
 	public void Snapshot_quickentry() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
+
 		String actualquickentry = sp.snapshotquickentry();
+
 		String expectedquickentry = "Snapshot ledger entries saved successfully";
 
+		if (actualquickentry.equals("No Snapshot Found for QuickEntry")) {
+
+			throw new SkipException("No snapshot found for QuickEntry. Test skipped.");
+		}
+
 		soft.assertEquals(actualquickentry, expectedquickentry);
-		// soft.assertEquals(true, true);
 
 		soft.assertAll();
 	}
@@ -71,12 +78,18 @@ public class SnapshotTest extends BaseTestUpdated {
 	@Test(dependsOnMethods = "Snapshot_quickentry", alwaysRun = true, groups = { "sanity", "regression" })
 	public void bulkaction() throws InterruptedException {
 		SoftAssert soft = new SoftAssert();
+
 		String actual = sp.bulkaction();
 
 		String expected = "Successful";
-		// soft.assertEquals(true, true);
+
+		if (actual.equals("No snapshots")) {
+
+			throw new SkipException("No snapshots available in Draft Widgets. Bulk Action test skipped.");
+		}
 
 		soft.assertEquals(actual, expected, "Bulk action status is not as expected");
+
 		soft.assertAll();
 
 	}

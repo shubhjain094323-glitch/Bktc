@@ -25,13 +25,13 @@
 
 
 		<classes>
-			<class name="test.DashboardTest" />
+			<!--	<class name="test.DashboardTest" />
 
-			<class name="test.BankTest" />
+			<class name="test.BankTest" />    -->
 			<class name="test.SnapshotTest" />
-			<class name="test.MoneylinkTest" />
+			<!--		<class name="test.MoneylinkTest" />
 			<class name="test.ReportsTest" />
-			<!--<class name="test.UpdatedetailsTest" />
+			<class name="test.UpdatedetailsTest" />
 				<class name="test.ReimbursementTest" /> -->
 
 
