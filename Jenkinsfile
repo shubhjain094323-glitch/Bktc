@@ -7,7 +7,7 @@ pipeline {
      * Runs approximately every 5 minutes
      */
    triggers {
-        cron('0 13 * * *')
+        cron('10 13 * * *')
     }
 
 
