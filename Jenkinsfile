@@ -37,27 +37,24 @@ pipeline {
         }
 
         stage('Run Sanity Tests') {
+    steps {
+        echo 'Running Sanity Tests...'
 
-            steps {
+        script {
+            def result = bat(
+                script: 'mvn test',
+                returnStatus: true
+            )
 
-                echo 'Running Sanity Tests...'
-
-                /*
-                 * Test cases may fail, but Jenkins build
-                 * should still remain SUCCESS.
-                 */
-                bat '''
-                    mvn test
-                    if %ERRORLEVEL% NEQ 0 (
-                        echo ==========================================
-                        echo Some TestNG test cases FAILED.
-                        echo Jenkins build will remain SUCCESS.
-                        echo Please check the Extent Report.
-                        echo ==========================================
-                        exit /b 0
-                    )
-                '''
+            if (result != 0) {
+                echo '⚠️ TestNG test cases failed.'
+                echo '⚠️ Jenkins build will remain SUCCESS.'
+            } else {
+                echo '✅ All TestNG test cases passed.'
             }
+        }
+    }
+
         }
 
         stage('Publish Extent Report') {
