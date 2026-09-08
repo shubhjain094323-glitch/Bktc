@@ -40,7 +40,6 @@ public class DriverFactory {
 				cap.setPlatform(Platform.WIN11);
 			} else if (os.equalsIgnoreCase("mac")) {
 				cap.setPlatform(Platform.MAC);
-
 			} else {
 				System.out.println("No default platform");
 				return;
@@ -146,9 +145,9 @@ public class DriverFactory {
 		if (day == 0)
 			browser = "chrome";
 		else if (day == 1)
-			browser = "firefox";
-		else
 			browser = "edge";
+		else
+			browser = "firefox";
 		
 		System.out.println("Today's Date: " + today);
 		System.out.println("DayOfYear: " + dayOfYear);

@@ -2,12 +2,8 @@ pipeline {
 
   agent any
 
-    /*
-     * Automatic execution
-     * Runs approximately every 5 minutes
-     */
    triggers {
-        cron('0 11 * * *')
+        cron('30 10 * * *')
     }
 
 
@@ -88,7 +84,7 @@ pipeline {
 
             emailext(
 
-                to: 'shubhjain094323@gmail.com , shubhamwakekar2@gmail.com',
+                to: 'shubhjain094323@gmail.com , shubhamwakekar2@gmail.com, akashgirase123@gmail.com',
 
                 subject:
                     "SANITY BUILD PASSED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
@@ -157,10 +153,6 @@ pipeline {
 
                     <br>
 
-                    Regards,<br>
-                    <b>Shubham</b><br>
-                    QA Engineer
-
                     </body>
 
                     </html>
@@ -172,7 +164,7 @@ pipeline {
 
             emailext(
 
-                to: 'shubhjain094323@gmail.com , shubhamwakekar2@gmail.com',
+                to: 'shubhjain094323@gmail.com , shubhamwakekar2@gmail.com, akashgirase123@gmail.com',
 
                 subject:
                     "SANITY BUILD FAILED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
@@ -236,11 +228,7 @@ pipeline {
 
                     <br>
 
-                    Regards,<br>
-                    <b>Shubham</b><br>
-                    QA Engineer
-
-                    </body>
+                   </body>
 
                     </html>
                 """

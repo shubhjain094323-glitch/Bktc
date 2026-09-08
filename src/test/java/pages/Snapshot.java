@@ -546,61 +546,63 @@ public class Snapshot {
 					"//div[contains(@class,'widget-block-new pending_usrin  active-widget')]//div[@class='wcounter-new ellipsisc']"));
 			String pendingsnapshots = pending.getText();
 			System.out.println("Snapshot available for the QuickEntry  is " + pendingsnapshots);
-			
-			 // Convert String to Integer
-	        int pendingCount = Integer.parseInt(pendingsnapshots);
-			
-	        if (pendingCount <= 0) {
 
-	            System.out.println("No snapshot found for QuickEntry");
-	            return "No Snapshot Found for QuickEntry";
+			// Convert String to Integer
+			int pendingCount = Integer.parseInt(pendingsnapshots);
 
-	        } else {
+			if (pendingCount <= 0) {
 
-			WebElement select_firstcheckbox = driver
-					.findElement(By.xpath("//label[@for='checkbox0']//div[contains(@class,'check')]"));
+				System.out.println("No snapshot found for QuickEntry");
+				return "No Snapshot Found for QuickEntry";
 
-			select_firstcheckbox.click();
+			} else {
 
-			// Add entries
-			wait.until(ExpectedConditions.elementToBeClickable(AddEntries));
-			AddEntries.click();
+				WebElement select_firstcheckbox = driver
+						.findElement(By.xpath("//label[@for='checkbox0']//div[contains(@class,'check')]"));
 
-			Thread.sleep(1000);
+				select_firstcheckbox.click();
 
-			wait.until(ExpectedConditions.elementToBeClickable(quickentrygstledgerSaveButton));
-			quickentrygstledgerSaveButton.click();
+				// Add entries
+				wait.until(ExpectedConditions.elementToBeClickable(AddEntries));
+				AddEntries.click();
 
-			Thread.sleep(3000);
-			wait.until(ExpectedConditions.invisibilityOf(QuickentryLoader));
+				Thread.sleep(1000);
 
-			partygst.click();
+				wait.until(ExpectedConditions.elementToBeClickable(quickentrygstledgerSaveButton));
+				quickentrygstledgerSaveButton.click();
 
-			actions.sendKeys(Keys.TAB).perform(); // focus on party ledger dropdown
-			actions.sendKeys(Keys.SPACE).perform(); // open the party ledger dropdown
-			actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform(); // select the first ledger
+				Thread.sleep(3000);
+				wait.until(ExpectedConditions.invisibilityOf(QuickentryLoader));
 
-			actions.sendKeys(Keys.TAB).perform(); // focus on purchase/sales ledger dropdown
-			actions.sendKeys(Keys.SPACE).perform(); // open the purchase/sales ledger dropdown
-			actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform(); // select the
-																										// second ledger
+				partygst.click();
 
-			wait.until(ExpectedConditions.elementToBeClickable(CreateEntries));
-			Thread.sleep(1000);
-			CreateEntries.click();
+				actions.sendKeys(Keys.TAB).perform(); // focus on party ledger dropdown
+				actions.sendKeys(Keys.SPACE).perform(); // open the party ledger dropdown
+				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform(); // select the first ledger
 
-			String actual_quickentry_status = getToastMessage();
+				actions.sendKeys(Keys.TAB).perform(); // focus on purchase/sales ledger dropdown
+				actions.sendKeys(Keys.SPACE).perform(); // open the purchase/sales ledger dropdown
+				actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform(); // select
+																											// the
+																											// second
+																											// ledger
 
-			System.out.println("Quick Entry Status is " + actual_quickentry_status);
+				wait.until(ExpectedConditions.elementToBeClickable(CreateEntries));
+				Thread.sleep(1000);
+				CreateEntries.click();
 
-			wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
+				String actual_quickentry_status = getToastMessage();
 
-			// driver.findElement(By.xpath("//button[normalize-space()='Back']")).click();
+				System.out.println("Quick Entry Status is " + actual_quickentry_status);
 
-			return actual_quickentry_status;
+				wait.until(ExpectedConditions.invisibilityOf(bulkuploadLoader));
 
-	        }
-	        } catch (Exception e) {
+				// driver.findElement(By.xpath("//button[normalize-space()='Back']")).click();
+
+				return actual_quickentry_status;
+
+			}
+		} catch (Exception e) {
 			System.out.println("Snapshot Quick Entry is not supported for this entity, please check entity setting");
 			return "Quick Entry Not Supported";
 		}
@@ -645,7 +647,7 @@ public class Snapshot {
 
 		if (draftsnapshotcounts > 0) {
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 1; i++) {
 
 				driver.findElement(By.xpath("//label[@for='checkbox" + i + "']//div[contains(@class,'check')]"))
 						.click();

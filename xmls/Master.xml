@@ -26,7 +26,6 @@
 
 		<classes>
 			<class name="test.DashboardTest" />
-
 			<class name="test.BankTest" />
 			<class name="test.SnapshotTest" />
 			<class name="test.MoneylinkTest" />
