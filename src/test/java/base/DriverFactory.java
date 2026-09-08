@@ -146,9 +146,9 @@ public class DriverFactory {
 		if (day == 0)
 			browser = "chrome";
 		else if (day == 1)
-			browser = "edge";
-		else
 			browser = "firefox";
+		else
+			browser = "edge";
 		
 		System.out.println("Today's Date: " + today);
 		System.out.println("DayOfYear: " + dayOfYear);
