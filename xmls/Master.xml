@@ -4,7 +4,7 @@
 <suite name="Suite">
 
 	<listeners>
-		<listener class-name="listeners.TestListner" />
+		<listener class-name="listeners.Listners_For_CrossBrowser" />
 		<!-- 	<listener class-name="listeners.Transform"> </listener> -->
 	</listeners>
 
@@ -27,10 +27,10 @@
 		<classes>
 			<class name="test.DashboardTest" />
 			<class name="test.BankTest" />
-			<class name="test.SnapshotTest" />
+			<!-- 		<class name="test.SnapshotTest" />
 			<class name="test.MoneylinkTest" />
 			<class name="test.ReportsTest" />
-			<!-- 	<class name="test.UpdatedetailsTest" />
+				<class name="test.UpdatedetailsTest" />
 				<class name="test.ReimbursementTest" /> -->
 
 

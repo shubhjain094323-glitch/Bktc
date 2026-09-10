@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-09-07T16:36:10 IST" name="Suite" finished-at="2026-09-07T16:36:36 IST" duration-ms="26226">
+  <suite started-at="2026-09-09T13:37:07 IST" name="Suite" finished-at="2026-09-09T13:38:40 IST" duration-ms="92227">
     <groups>
+      <group name="regression">
+        <method signature="BankTest.OpenBankingModule()[pri:0, instance:test.BankTest@7bedc48a]" name="OpenBankingModule" class="test.BankTest"/>
+        <method signature="BankTest.Addbank()[pri:0, instance:test.BankTest@7bedc48a]" name="Addbank" class="test.BankTest"/>
+        <method signature="BankTest.deleteBank()[pri:0, instance:test.BankTest@7bedc48a]" name="deleteBank" class="test.BankTest"/>
+        <method signature="DashboardTest.dashboard_module()[pri:0, instance:test.DashboardTest@d35dea7]" name="dashboard_module" class="test.DashboardTest"/>
+      </group> <!-- regression -->
+      <group name="sanity">
+        <method signature="BankTest.OpenBankingModule()[pri:0, instance:test.BankTest@7bedc48a]" name="OpenBankingModule" class="test.BankTest"/>
+        <method signature="BankTest.Addbank()[pri:0, instance:test.BankTest@7bedc48a]" name="Addbank" class="test.BankTest"/>
+        <method signature="BankTest.update_Bank()[pri:0, instance:test.BankTest@7bedc48a]" name="update_Bank" class="test.BankTest"/>
+        <method signature="BankTest.deleteBank()[pri:0, instance:test.BankTest@7bedc48a]" name="deleteBank" class="test.BankTest"/>
+        <method signature="DashboardTest.dashboard_module()[pri:0, instance:test.DashboardTest@d35dea7]" name="dashboard_module" class="test.DashboardTest"/>
+      </group> <!-- sanity -->
     </groups>
-    <test started-at="2026-09-07T16:36:10 IST" name="ChromeTest" finished-at="2026-09-07T16:36:36 IST" duration-ms="26226">
-      <class name="test.SnapshotTest">
-        <test-method is-config="true" signature="SetUp(java.lang.String,java.lang.String,boolean)[pri:0, instance:test.SnapshotTest@544fa968]" started-at="2026-09-07T16:36:10 IST" name="SetUp" finished-at="2026-09-07T16:36:31 IST" duration-ms="20956" status="PASS">
+    <test started-at="2026-09-09T13:37:07 IST" name="ChromeTest" finished-at="2026-09-09T13:38:40 IST" duration-ms="92227">
+      <class name="test.DashboardTest">
+        <test-method is-config="true" signature="SetUp(java.lang.String,java.lang.String,boolean)[pri:0, instance:test.DashboardTest@d35dea7]" started-at="2026-09-09T13:37:08 IST" name="SetUp" finished-at="2026-09-09T13:37:33 IST" duration-ms="24536" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -28,55 +41,66 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- SetUp -->
-        <test-method is-config="true" signature="init()[pri:0, instance:test.SnapshotTest@544fa968]" started-at="2026-09-07T16:36:31 IST" name="init" finished-at="2026-09-07T16:36:31 IST" duration-ms="104" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:test.DashboardTest@d35dea7]" started-at="2026-09-09T13:37:33 IST" name="init" finished-at="2026-09-09T13:37:33 IST" duration-ms="5" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="Snapshot_quickentry()[pri:0, instance:test.SnapshotTest@544fa968]" started-at="2026-09-07T16:36:31 IST" name="Snapshot_quickentry" finished-at="2026-09-07T16:36:36 IST" duration-ms="4293" status="SKIP">
-          <exception class="org.testng.SkipException">
-            <message>
-              <![CDATA[No snapshot found for QuickEntry. Test skipped.]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.SkipException: No snapshot found for QuickEntry. Test skipped.
-at test.SnapshotTest.Snapshot_quickentry(SnapshotTest.java:71)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-at org.testng.TestNG.runSuites(TestNG.java:1112)
-at org.testng.TestNG.run(TestNG.java:1079)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.SkipException -->
+        <test-method signature="dashboard_module()[pri:0, instance:test.DashboardTest@d35dea7]" started-at="2026-09-09T13:37:33 IST" name="dashboard_module" finished-at="2026-09-09T13:37:53 IST" duration-ms="20195" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Snapshot_quickentry -->
-        <test-method is-config="true" signature="TearDown()[pri:0, instance:test.SnapshotTest@544fa968]" started-at="2026-09-07T16:36:36 IST" name="TearDown" finished-at="2026-09-07T16:36:36 IST" duration-ms="455" status="PASS">
+        </test-method> <!-- dashboard_module -->
+        <test-method is-config="true" signature="TearDown()[pri:0, instance:test.DashboardTest@d35dea7]" started-at="2026-09-09T13:37:53 IST" name="TearDown" finished-at="2026-09-09T13:37:53 IST" duration-ms="487" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TearDown -->
-      </class> <!-- test.SnapshotTest -->
+      </class> <!-- test.DashboardTest -->
+      <class name="test.BankTest">
+        <test-method is-config="true" signature="SetUp(java.lang.String,java.lang.String,boolean)[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:37:53 IST" name="SetUp" finished-at="2026-09-09T13:38:17 IST" duration-ms="23588" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[auto]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[windows]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SetUp -->
+        <test-method is-config="true" signature="init()[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:38:17 IST" name="init" finished-at="2026-09-09T13:38:17 IST" duration-ms="165" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="OpenBankingModule()[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:38:17 IST" name="OpenBankingModule" finished-at="2026-09-09T13:38:18 IST" duration-ms="489" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- OpenBankingModule -->
+        <test-method signature="Addbank()[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:38:18 IST" name="Addbank" finished-at="2026-09-09T13:38:24 IST" depends-on-methods="test.BankTest.OpenBankingModule" duration-ms="6702" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Addbank -->
+        <test-method signature="update_Bank()[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:38:24 IST" name="update_Bank" finished-at="2026-09-09T13:38:32 IST" depends-on-methods="test.BankTest.Addbank" duration-ms="7679" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- update_Bank -->
+        <test-method signature="deleteBank()[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:38:32 IST" name="deleteBank" finished-at="2026-09-09T13:38:39 IST" depends-on-methods="test.BankTest.update_Bank" duration-ms="7177" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBank -->
+        <test-method is-config="true" signature="TearDown()[pri:0, instance:test.BankTest@7bedc48a]" started-at="2026-09-09T13:38:39 IST" name="TearDown" finished-at="2026-09-09T13:38:40 IST" duration-ms="372" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TearDown -->
+      </class> <!-- test.BankTest -->
     </test> <!-- ChromeTest -->
   </suite> <!-- Suite -->
 </testng-results>

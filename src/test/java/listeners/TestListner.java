@@ -118,9 +118,50 @@ public class TestListner extends BaseTestUpdated implements ITestListener {
 
 	public void onTestSkipped(ITestResult Result) {
 		System.out.println("Name of the Skipped Test is " + Result.getName());
-		test = extent.createTest(Result.getName());
-		test.log(Status.SKIP,
-				MarkupHelper.createLabel("Name of the skipped test case is " + Result.getName(), ExtentColor.GREY));
+	//	test = extent.createTest(Result.getName());
+	//	test.log(Status.SKIP,
+	//			MarkupHelper.createLabel("Name of the skipped test case is " + Result.getName(), ExtentColor.GREY));
+		
+		String testName = Result.getName();
+
+	    System.out.println("Name of the Skipped Test is " + testName);
+
+	    // Get skip reason
+	    Throwable throwable = Result.getThrowable();
+
+	    test = extent.createTest(testName);
+
+	    test.log(Status.SKIP,
+	            MarkupHelper.createLabel(
+	                    "Name of the skipped test case is " + testName,
+	                    ExtentColor.GREY));
+
+	    // Add skip reason to Extent Report
+	    if (throwable != null) {
+
+	        System.out.println("========== SKIP REASON ==========");
+	        System.out.println("Exception Type: " 
+	                + throwable.getClass().getSimpleName());
+	        System.out.println("Skip Message: " 
+	                + throwable.getMessage());
+	        System.out.println("================================");
+
+	        test.log(Status.SKIP,
+	                "<b>Skip Reason:</b> " 
+	                + throwable.getClass().getSimpleName()
+	                + "<br><b>Message:</b> "
+	                + throwable.getMessage());
+
+	        // Add complete stack trace
+	        test.skip(throwable);
+
+	    } else {
+
+	        test.log(Status.SKIP,
+	                "<b>Skip Reason:</b> No skip reason provided.");
+	    }
+		
+		
 	}
 
 	public void onFinish(ITestContext context) {

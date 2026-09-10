@@ -1964,3 +1964,33 @@ Session ID: b47793e5-b653-4646-86ee-e8f927801d50
 16:36:25.651 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
 16:36:29.297 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
 16:36:31.944 [main] INFO  pages.Snapshot.snapshotquickentry(Snapshot.java:523)oggger - Quick Entry starting
+13:32:42.172 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+13:32:44.195 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+13:32:49.887 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+13:32:54.061 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+13:33:25.453 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+13:33:27.465 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+13:33:32.830 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+13:33:36.708 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+13:33:39.400 [main] INFO  test.BankTest.OpenBankingModule(BankTest.java:34)oggger - Banking Module Open
+13:33:39.797 [main] INFO  pages.BankingPage.addbank(BankingPage.java:113)oggger - Clicking for Add Bank
+13:33:40.393 [main] INFO  pages.BankingPage.addbank(BankingPage.java:115)oggger - Entering the Financial Institute Details
+13:33:44.801 [main] INFO  pages.BankingPage.addbank(BankingPage.java:131)oggger - Clicking on the Save Button for adding bank
+13:33:45.038 [main] INFO  pages.BankingPage.addbank(BankingPage.java:135)oggger - Finanancial Insitute Added
+13:33:52.259 [main] INFO  pages.BankingPage.update_Bank(BankingPage.java:166)oggger - Financial Institute Updated
+13:33:59.129 [main] INFO  pages.BankingPage.deletebank(BankingPage.java:150)oggger - Financial Institute Deleted
+13:37:18.401 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+13:37:20.409 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+13:37:26.066 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+13:37:30.680 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+13:38:03.290 [main] INFO  pages.LogInPage.openURL(LogInPage.java:67)oggger - Opening the URL
+13:38:05.301 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:74)oggger - Entering Credentials for the Login
+13:38:10.971 [main] INFO  pages.LogInPage.performLogin(LogInPage.java:84)oggger - Logged In Successfully
+13:38:15.025 [main] INFO  pages.LogInPage.entityselection(LogInPage.java:104)oggger - Entity Selected
+13:38:17.699 [main] INFO  test.BankTest.OpenBankingModule(BankTest.java:34)oggger - Banking Module Open
+13:38:18.199 [main] INFO  pages.BankingPage.addbank(BankingPage.java:113)oggger - Clicking for Add Bank
+13:38:18.777 [main] INFO  pages.BankingPage.addbank(BankingPage.java:115)oggger - Entering the Financial Institute Details
+13:38:23.328 [main] INFO  pages.BankingPage.addbank(BankingPage.java:131)oggger - Clicking on the Save Button for adding bank
+13:38:23.636 [main] INFO  pages.BankingPage.addbank(BankingPage.java:135)oggger - Finanancial Insitute Added
+13:38:30.387 [main] INFO  pages.BankingPage.update_Bank(BankingPage.java:166)oggger - Financial Institute Updated
+13:38:36.958 [main] INFO  pages.BankingPage.deletebank(BankingPage.java:150)oggger - Financial Institute Deleted
